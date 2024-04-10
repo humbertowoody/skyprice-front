@@ -17,7 +17,7 @@ export default function Footer() {
         bgcolor="primary.main"
         color="primary.contrastText">
         <b>ESCOM - TT 2024-A053</b> Humberto Alejandro Ortega Alcocer &copy;
-        {new Date().getFullYear()} - Derechos Reservados
+        {new Date().getFullYear()}
       </Box>
 
       {/* Para pantallas grandes */}

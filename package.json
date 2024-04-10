@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d out --cname skyprice.xyz",
-    "post-update": "echo \"codesandbox preview only, need an update\" && pnpm update --latest"
+    "deploy": "npm run build && touch ./out/.nojekyll && gh-pages -d out --cname skyprice.xyz -t true"
   },
   "dependencies": {
     "@emotion/cache": "latest",
