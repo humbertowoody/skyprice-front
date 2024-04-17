@@ -447,8 +447,6 @@ export default function PredictionForm() {
             />
           </Grid>
 
-          {/* Select de Municipality con el valor seleccionado acorde al estado (por si el autocomplete actualiza el valor) */}
-
           <Grid
             item
             xs={12}

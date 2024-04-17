@@ -11,10 +11,19 @@ import { Modelos } from '@/components/Modelos';
 import { Datos } from '@/components/Datos';
 import Image from 'next/image';
 import skyline from '/public/skyline-cdmx-sm.jpg';
+import { Paper, Grid, Link } from '@mui/material';
+import DescriptionIcon from '@mui/icons-material/Description';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ApiIcon from '@mui/icons-material/Api';
+import Button from '@mui/material/Button';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 export default function PaginaEstadisticas() {
   // URL de la API
   const URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+  const [copySuccess, setCopySuccess] = React.useState('');
 
   // Estado para almacenar la respuesta de la API
   const [modelos, setModelos] = React.useState<Estadisticas>({
@@ -76,6 +85,16 @@ export default function PaginaEstadisticas() {
       .then((response) => response.json())
       .then((data) => setModelos(data));
   }, []);
+
+  // Función para copiar el URL al portapapeles
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(URL);
+      setCopySuccess('¡URL copiada!');
+    } catch (err) {
+      setCopySuccess('Error al copiar');
+    }
+  };
 
   // Renderizar la página
   return (
@@ -156,6 +175,120 @@ export default function PaginaEstadisticas() {
               style={{ width: '100%', height: 'auto' }}
             />
           </Box>
+        </Box>
+      </Container>
+
+      {/*Sección con información del API pública URL, URL del swagger, URL de redoc, etc*/}
+      <hr></hr>
+      <Container>
+        <Box
+          sx={{
+            my: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <ApiIcon sx={{ fontSize: 50, color: 'primary.main' }} />
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{ mt: 2, mb: 3, textAlign: 'center' }}>
+            API Pública de <strong>SkyPrice</strong>
+          </Typography>
+          <Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+            ¿Te gustaría utilizar nuestra API para obtener estimaciones de
+            precios de departamentos en la Ciudad de México? Visita nuestra
+            documentación para conocer los endpoints disponibles y cómo
+            utilizarlos.
+          </Typography>
+
+          {/* Mostrar el base endpoint en un tipo de texto para código */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              mt: 2,
+              mb: 3,
+            }}>
+            <Typography
+              variant="button"
+              component="div"
+              sx={{
+                mb: 1,
+                fontFamily: 'monospace',
+                backgroundColor: 'grey.100',
+                padding: 1,
+                borderRadius: 1,
+                textTransform: 'lowercase',
+              }}>
+              {URL}
+            </Typography>
+            <Button
+              variant="outlined"
+              startIcon={<ContentCopyIcon />}
+              onClick={handleCopy}
+              sx={{ mb: 2 }}>
+              Copiar al portapapeles
+            </Button>
+            {copySuccess && (
+              <Typography variant="caption" sx={{ color: 'success.main' }}>
+                {copySuccess}
+              </Typography>
+            )}
+          </Box>
+
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper elevation={3} sx={{ p: 2 }}>
+                <DescriptionIcon
+                  sx={{ fontSize: 30, color: 'secondary.main' }}
+                />
+                <Typography variant="h6" component="div" sx={{ mt: 1, mb: 1 }}>
+                  Swagger UI
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="div"
+                  sx={{ mt: 1, mb: 1 }}>
+                  Swagger UI es una herramienta que permite visualizar y probar
+                  los endpoints de una API de manera interactiva.
+                </Typography>
+                <Link href={`${URL}/openapi`} target="_blank" rel="noopener">
+                  <Button
+                    variant="outlined"
+                    startIcon={<OpenInNewIcon />}
+                    sx={{ mb: 2 }}>
+                    Visitar Swagger UI
+                  </Button>
+                </Link>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper elevation={3} sx={{ p: 2 }}>
+                <VisibilityIcon sx={{ fontSize: 30, color: 'success.main' }} />
+                <Typography variant="h6" component="div" sx={{ mt: 1, mb: 1 }}>
+                  ReDoc
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="div"
+                  sx={{ mt: 1, mb: 1 }}>
+                  ReDoc es una herramienta de documentación de APIs para
+                  visualizar la documentación de una API.
+                </Typography>
+                <Link href={`${URL}/redoc`} target="_blank" rel="noopener">
+                  <Button
+                    variant="outlined"
+                    startIcon={<OpenInNewIcon />}
+                    sx={{ mb: 2 }}>
+                    Visitar ReDoc
+                  </Button>
+                </Link>
+              </Paper>
+            </Grid>
+          </Grid>
         </Box>
       </Container>
 
