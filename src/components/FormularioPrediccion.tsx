@@ -498,8 +498,9 @@ export default function PredictionForm() {
           {!alcaldias.includes(formik.values.Municipality) && (
             <Grid item xs={12}>
               <Typography variant="body2" align="center">
-                Por favor, escribe una dirección válida, dentro de la CDMX, para
-                visualizar el mapa de la ubicación de la propiedad.
+                Por favor escribe una dirección válida dentro de la CDMX para
+                visualizar el mapa de la ubicación de la propiedad y estimar el
+                precio.
               </Typography>
             </Grid>
           )}
