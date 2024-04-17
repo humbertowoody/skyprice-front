@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'SkyPrice',
     description: 'Estima el precio de tu departamento en la Ciudad de México',
     creator: '@humbertowoody',
