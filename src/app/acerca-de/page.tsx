@@ -81,55 +81,55 @@ export default function PaginaEstadisticas() {
   return (
     <React.Fragment>
       <NavBar />
-      <Container>
+      <Container
+        sx={{
+          mt: 2,
+          //display: 'flex',
+          //flexDirection: 'column',
+          //justifyContent: 'center',
+          //alignItems: 'center',
+        }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            mb: 2,
+            textAlign: 'center',
+            fontWeight: '600',
+          }}>
+          SkyPrice, plataforma de estimación de precios de mercado de
+          departamentos en la Ciudad de México.
+        </Typography>
         <Box
           sx={{
-            mt: 2,
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
+            flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
+            justifyContent: 'center',
           }}>
+          <Image
+            src={skyline}
+            alt="Skyline de la Ciudad de México"
+            style={{
+              height: 'auto',
+              width: '100%',
+              maxHeight: '300px',
+              border: '1px solid #000',
+              borderRadius: '15px',
+              flex: 1,
+            }}
+          />
           <Typography
-            variant="h4"
-            component="h1"
-            sx={{
-              mb: 2,
-              textAlign: 'center',
-              fontWeight: '600',
-            }}>
-            SkyPrice, plataforma de estimación de precios de mercado de
-            departamentos en la Ciudad de México.
+            variant="body1"
+            textAlign="justify"
+            sx={{ flex: 1, margin: { xs: '1rem 0', md: '0 1rem' } }}>
+            Para entender cómo se comportan los precios de las propiedades en la
+            Ciudad de México se desarrolló una plataforma de estimación de
+            precios de mercado de departamentos en la Ciudad de México. La
+            plataforma permite a los usuarios estimar el precio de mercado de un
+            departamento en la Ciudad de México de acuerdo a sus
+            características.
           </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 1,
-              p: 2,
-            }}>
-            <Image
-              src={skyline}
-              alt="Skyline de la Ciudad de México"
-              style={{
-                width: 'auto',
-                height: '300px',
-                border: '1px solid #000',
-                borderRadius: '15px',
-                margin: '0 1rem 1rem 0',
-              }}
-            />
-            <Typography variant="body1" textAlign="justify" gutterBottom>
-              Para entender cómo se comportan los precios de las propiedades en
-              la Ciudad de México se desarrolló una plataforma de estimación de
-              precios de mercado de departamentos en la Ciudad de México. La
-              plataforma permite a los usuarios estimar el precio de mercado de
-              un departamento en la Ciudad de México de acuerdo a sus
-              características.
-            </Typography>
-          </Box>
         </Box>
       </Container>
 
