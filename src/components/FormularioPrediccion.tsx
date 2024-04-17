@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactElement, useState } from 'react';
+import React, { Fragment, ReactElement, useState } from 'react';
 import {
   Box,
   TextField,
@@ -9,6 +9,7 @@ import {
   Typography,
   Card,
   CardContent,
+  InputAdornment,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -19,9 +20,14 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import InfoIcon from '@mui/icons-material/Info';
+import BedIcon from '@mui/icons-material/Bed';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
 
 // Declarar un array statico para las librerias de Google Maps
-const libraries: any[] = ['places', 'geocoding', 'geometry'];
+const libraries: any[] = ['places'];
 
 // Alcaldías
 const alcaldias: string[] = [
@@ -123,7 +129,7 @@ export default function PredictionForm() {
     onSubmit: async (values) => {
       // Realizar llamada a API para obtener predicciones
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/predict`,
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/predict`,
         {
           method: 'POST',
           headers: {
@@ -200,30 +206,6 @@ export default function PredictionForm() {
   const onLoad = (autocomplete: any) => {
     // Actualizar el estado con el componente Autocomplete
     setAutocomplete(autocomplete);
-
-    // Dentro de Autocomplete onPlaceChanged
-    const place = autocomplete.getPlace();
-    if (!place?.geometry) {
-      return;
-    }
-
-    // Extrae latitud y longitud del lugar
-    const lat = place.geometry.location.lat();
-    const lng = place.geometry.location.lng();
-
-    // Extrae el municipio del componente de dirección de place
-    const municipality = encontrarMunicipio(
-      place.address_components,
-      place.formatted_address,
-    );
-
-    // Actualiza el estado del formulario con estos valores
-    formik.setFieldValue('Lat', lat);
-    formik.setFieldValue('Lng', lng);
-    if (municipality) formik.setFieldValue('Municipality', municipality);
-
-    // Actualizar el estado de la Dirección
-    setAddress(place.formatted_address);
   };
 
   const onPlaceChanged = () => {
@@ -236,8 +218,8 @@ export default function PredictionForm() {
       }
 
       // Extraer latitud y longitud del lugar
-      const lat = place.geometry.location.lat();
-      const lng = place.geometry.location.lng();
+      const lat = place?.geometry?.location?.lat();
+      const lng = place?.geometry?.location?.lng();
 
       // Extrae el municipio del componente de dirección de place
       const municipality = encontrarMunicipio(
@@ -248,7 +230,7 @@ export default function PredictionForm() {
       // Actualiza el estado del formulario con estos valores
       formik.setFieldValue('Lat', lat);
       formik.setFieldValue('Lng', lng);
-      if (municipality) formik.setFieldValue('Municipality', municipality);
+      formik.setFieldValue('Municipality', municipality);
 
       // Actualizar el estado de la Dirección
       setAddress(place.formatted_address);
@@ -278,15 +260,37 @@ export default function PredictionForm() {
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12}>
-            <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <Autocomplete
+              onLoad={onLoad}
+              onPlaceChanged={onPlaceChanged}
+              bounds={{
+                east: -98.9,
+                west: -99.4,
+                north: 19.7,
+                south: 19.1,
+              }}
+              options={{
+                //types: ['address'],
+                componentRestrictions: {
+                  country: 'MX',
+                },
+                strictBounds: true,
+              }}>
               <TextField
                 fullWidth
                 id="address"
                 name="address"
-                label="Escribe la dirección del departamento"
+                label="Dirección del departamento"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 margin="normal"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <AddLocationIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Autocomplete>
           </Grid>
@@ -298,7 +302,7 @@ export default function PredictionForm() {
               type="number"
               id="Size_Terrain"
               name="Size_Terrain"
-              label="Tamaño del Terreno"
+              label="Tam. Terreno"
               value={formik.values.Size_Terrain}
               onChange={formik.handleChange}
               error={
@@ -309,6 +313,11 @@ export default function PredictionForm() {
                 formik.touched.Size_Terrain && formik.errors.Size_Terrain
               }
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">m²</InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
@@ -319,7 +328,7 @@ export default function PredictionForm() {
               type="number"
               id="Size_Construction"
               name="Size_Construction"
-              label="Tamaño de la Construcción"
+              label="Tam. Construcción"
               value={formik.values.Size_Construction}
               onChange={formik.handleChange}
               error={
@@ -331,6 +340,11 @@ export default function PredictionForm() {
                 formik.errors.Size_Construction
               }
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">m²</InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
@@ -347,6 +361,13 @@ export default function PredictionForm() {
               error={formik.touched.Rooms && Boolean(formik.errors.Rooms)}
               helperText={formik.touched.Rooms && formik.errors.Rooms}
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <BedIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
@@ -366,6 +387,13 @@ export default function PredictionForm() {
               }
               helperText={formik.touched.Bathrooms && formik.errors.Bathrooms}
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <BathtubIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
@@ -376,12 +404,19 @@ export default function PredictionForm() {
               type="number"
               id="Parking"
               name="Parking"
-              label="Lugares de Estacionamiento"
+              label="Estacionamientos"
               value={formik.values.Parking}
               onChange={formik.handleChange}
               error={formik.touched.Parking && Boolean(formik.errors.Parking)}
               helperText={formik.touched.Parking && formik.errors.Parking}
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <DirectionsCarIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
@@ -392,12 +427,19 @@ export default function PredictionForm() {
               type="number"
               id="Age"
               name="Age"
-              label="Edad de la Propiedad"
+              label="Antigüedad"
               value={formik.values.Age}
               onChange={formik.handleChange}
               error={formik.touched.Age && Boolean(formik.errors.Age)}
               helperText={formik.touched.Age && formik.errors.Age}
               margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <EventAvailableIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
           {/* Componente mostrando el texto de Municipality pero diciendo 'Alcaldía' */}
@@ -440,6 +482,15 @@ export default function PredictionForm() {
                     lat: Number(formik.values.Lat),
                     lng: Number(formik.values.Lng),
                   }}
+                  animation={google.maps.Animation.BOUNCE}
+                  icon={{
+                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                    scale: 10,
+                    fillColor: 'red',
+                    fillOpacity: 0.8,
+                    strokeColor: 'black',
+                    strokeWeight: 3,
+                  }}
                 />
               </GoogleMap>
             </Grid>
@@ -447,7 +498,8 @@ export default function PredictionForm() {
           {!alcaldias.includes(formik.values.Municipality) && (
             <Grid item xs={12}>
               <Typography variant="body2" align="center">
-                Por favor, escribe una dirección válida para mostrar el mapa.
+                Por favor, escribe una dirección válida, dentro de la CDMX, para
+                visualizar el mapa de la ubicación de la propiedad.
               </Typography>
             </Grid>
           )}
@@ -458,86 +510,97 @@ export default function PredictionForm() {
           variant="contained"
           fullWidth
           type="submit"
-          disabled={!formik.dirty || !formik.isValid}
+          disabled={
+            !formik.dirty ||
+            !formik.isValid ||
+            formik.isSubmitting ||
+            !address ||
+            !!predictions
+          }
           sx={{ mt: 3 }}>
           {formik.isSubmitting ? 'Estimando...' : 'Estimar Precio'}
           {formik.dirty && !formik.isValid && ' (Revisa el formulario)'}
         </Button>
       </form>
 
-      <hr />
       {/* Mostrar resultados en tarjetas */}
       {predictions && (
-        <Box
-          display="flex"
-          justifyContent="center"
-          flexWrap="wrap"
-          gap={2}
-          mt={4}>
-          <Typography variant="h5" align="center" gutterBottom>
-            Resultados de la Estimación
-          </Typography>
-          <Grid container spacing={3} justifyContent="center">
-            {Object.entries(predictions).map(
-              ([key, value]): ReactElement => (
-                <Grid key={key} item xs={12} sm={4}>
-                  <Card sx={{ textAlign: 'center' }}>
-                    <CardContent>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          marginBottom: 1,
-                        }}>
-                        Modelo: {key.replace(/_/g, ' ')}
-                      </Typography>
-
-                      <Typography variant="body1">
-                        ~
-                        {
-                          // @ts-ignore
-                          value.toLocaleString('es-MX', {
-                            style: 'currency',
-                            currency: 'MXN',
-                          })
-                        }{' '}
-                        MXN
-                      </Typography>
-                    </CardContent>
-                    {/* Footer de la tarjeta */}
-                  </Card>
-                </Grid>
-              ),
-            )}
-          </Grid>
-
+        <Fragment>
+          <hr />
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              p: 2,
-              borderRadius: 1,
-              border: 1,
-            }}>
-            {/* ícono de información */}
-            <InfoIcon color="primary" sx={{ flex: 1 }} />
-
-            <Typography variant="body2" color="text.secondary" sx={{ flex: 8 }}>
-              Las predicciones son aproximadas y los resultados de cada modelo
-              pueden variar. Los precios son estimados en pesos mexicanos. Para
-              conocer el precio real de una propiedad, se recomienda contactar a
-              un profesional en bienes raíces. Si deseas conocer más detalles de
-              los modelos de predicción, puedes consultar la documentación del
-              proyecto en{' '}
-              <a href="/acerca-de">
-                la sección de <strong>Acerca De</strong>
-              </a>
-              .
+            display="flex"
+            justifyContent="center"
+            flexWrap="wrap"
+            gap={2}
+            mt={4}>
+            <Typography variant="h5" align="center" gutterBottom>
+              Resultados de la Estimación
             </Typography>
+            <Grid container spacing={3} justifyContent="center">
+              {Object.entries(predictions).map(
+                ([key, value]): ReactElement => (
+                  <Grid key={key} item xs={12} sm={4}>
+                    <Card sx={{ textAlign: 'center' }}>
+                      <CardContent>
+                        <Typography
+                          variant="h6"
+                          component="div"
+                          sx={{
+                            marginBottom: 1,
+                          }}>
+                          Modelo: {key.replace(/_/g, ' ')}
+                        </Typography>
+
+                        <Typography variant="body1">
+                          ~
+                          {
+                            // @ts-ignore
+                            value.toLocaleString('es-MX', {
+                              style: 'currency',
+                              currency: 'MXN',
+                            })
+                          }{' '}
+                          MXN
+                        </Typography>
+                      </CardContent>
+                      {/* Footer de la tarjeta */}
+                    </Card>
+                  </Grid>
+                ),
+              )}
+            </Grid>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                p: 2,
+                borderRadius: 1,
+                border: 1,
+              }}>
+              {/* ícono de información */}
+              <InfoIcon color="primary" sx={{ flex: 1 }} />
+
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ flex: 8 }}>
+                Las predicciones son aproximadas y los resultados de cada modelo
+                pueden variar. Los precios son estimados en pesos mexicanos.
+                Para conocer el precio real de una propiedad, se recomienda
+                contactar a un profesional en bienes raíces. Si deseas conocer
+                más detalles de los modelos de predicción, puedes consultar la
+                documentación del proyecto en{' '}
+                <a href="/acerca-de">
+                  la sección de <strong>Acerca De</strong>
+                </a>
+                .
+              </Typography>
+            </Box>
           </Box>
-        </Box>
+        </Fragment>
       )}
     </Paper>
   );

@@ -1,11 +1,18 @@
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+} from '@mui/material';
 import React from 'react';
 import { Estadisticas } from '@/types/estadisticas';
 
 export const Datos: React.FC<{ estadisticas: Estadisticas }> = ({
   estadisticas,
 }) => (
-  <Box sx={{ mt: 4 }}>
+  <Container sx={{ mt: 4 }}>
     <Typography variant="h5" component="h2" sx={{ mt: 4 }}>
       Datos
     </Typography>
@@ -17,80 +24,78 @@ export const Datos: React.FC<{ estadisticas: Estadisticas }> = ({
         conjunto de datos homogéneo y sin valores nulos.
       </Typography>
     </Box>
-    <Box
-      sx={{
-        mt: 4,
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        gap: 2,
-      }}>
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            Datos "limpios"
-          </Typography>
-          <Typography variant="h5" component="div">
-            {estadisticas.dataset.training.X[0] +
-              estadisticas.dataset.testing.X[0]}{' '}
-            registros de {estadisticas.dataset.training.X[1]} características
-          </Typography>
-          <Typography variant="body2">
-            Esto equivale al{' '}
-            {(
-              ((estadisticas.dataset.training.X[0] +
-                estadisticas.dataset.testing.X[0]) /
-                estadisticas.dataset.original[0]) *
-              100
-            ).toFixed(2)}
-            % del total de datos disponibles ({estadisticas.dataset.original[0]}{' '}
-            registros).
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            Datos de entrenamiento
-          </Typography>
-          <Typography variant="h5" component="div">
-            {estadisticas.dataset.training.X[0]} registros de{' '}
-            {estadisticas.dataset.training.X[1]} características
-          </Typography>
-          <Typography variant="body2">
-            Esto equivale al{' '}
-            {(
-              (estadisticas.dataset.training.X[0] /
-                (estadisticas.dataset.training.X[0] +
-                  estadisticas.dataset.testing.X[0])) *
-              100
-            ).toFixed(2)}
-            % de los datos (entrenamiento y prueba).
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            Datos de prueba
-          </Typography>
-          <Typography variant="h5" component="div">
-            {estadisticas.dataset.testing.X[0]} registros de{' '}
-            {estadisticas.dataset.testing.X[1]} características
-          </Typography>
-          <Typography variant="body2">
-            Esto equivale al{' '}
-            {(
-              (estadisticas.dataset.testing.X[0] /
-                (estadisticas.dataset.training.X[0] +
-                  estadisticas.dataset.testing.X[0])) *
-              100
-            ).toFixed(2)}
-            % de los datos (entrenamiento y prueba).
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
-  </Box>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="div">
+              Datos "limpios"
+            </Typography>
+            <Typography variant="h5" component="div">
+              {estadisticas.dataset.training.X[0] +
+                estadisticas.dataset.testing.X[0]}{' '}
+              registros de {estadisticas.dataset.training.X[1]} características
+            </Typography>
+            <Typography variant="body2">
+              Esto equivale al{' '}
+              {(
+                ((estadisticas.dataset.training.X[0] +
+                  estadisticas.dataset.testing.X[0]) /
+                  estadisticas.dataset.original[0]) *
+                100
+              ).toFixed(2)}
+              % del total de datos disponibles (
+              {estadisticas.dataset.original[0]} registros).
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="div">
+              Datos de entrenamiento
+            </Typography>
+            <Typography variant="h5" component="div">
+              {estadisticas.dataset.training.X[0]} registros de{' '}
+              {estadisticas.dataset.training.X[1]} características
+            </Typography>
+            <Typography variant="body2">
+              Esto equivale al{' '}
+              {(
+                (estadisticas.dataset.training.X[0] /
+                  (estadisticas.dataset.training.X[0] +
+                    estadisticas.dataset.testing.X[0])) *
+                100
+              ).toFixed(2)}
+              % de los datos (entrenamiento y prueba).
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="div">
+              Datos de prueba
+            </Typography>
+            <Typography variant="h5" component="div">
+              {estadisticas.dataset.testing.X[0]} registros de{' '}
+              {estadisticas.dataset.testing.X[1]} características
+            </Typography>
+            <Typography variant="body2">
+              Esto equivale al{' '}
+              {(
+                (estadisticas.dataset.testing.X[0] /
+                  (estadisticas.dataset.training.X[0] +
+                    estadisticas.dataset.testing.X[0])) *
+                100
+              ).toFixed(2)}
+              % de los datos (entrenamiento y prueba).
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  </Container>
 );

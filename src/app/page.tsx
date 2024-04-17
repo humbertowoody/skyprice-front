@@ -3,6 +3,7 @@ import { Box, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar';
 import FormularioPrediccion from '@/components/FormularioPrediccion';
+import skyline from '/public/skyline-cdmx-sm.jpg';
 
 export default function Estimacion() {
   return (
@@ -10,8 +11,7 @@ export default function Estimacion() {
       sx={{
         minHeight: '100vh',
         //backgroundImage: 'url(https://source.unsplash.com/random?real-estate)',
-        backgroundImage:
-          'url(https://source.unsplash.com/random?Mexico-City-skyline,CDMX-buildings)',
+        backgroundImage: `url(${skyline.src})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',

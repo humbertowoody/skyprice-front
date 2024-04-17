@@ -3,18 +3,18 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { Creditos } from '@/components/Creditos';
 import { Estadisticas } from '@/types/estadisticas';
 import { Modelos } from '@/components/Modelos';
 import { Datos } from '@/components/Datos';
+import Image from 'next/image';
+import skyline from '/public/skyline-cdmx-sm.jpg';
 
 export default function PaginaEstadisticas() {
   // URL de la API
-  const URL = process.env.API_URL || 'http://localhost:8000';
+  const URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   // Estado para almacenar la respuesta de la API
   const [modelos, setModelos] = React.useState<Estadisticas>({
@@ -84,19 +84,32 @@ export default function PaginaEstadisticas() {
       <Container>
         <Box
           sx={{
-            my: 4,
+            mt: 2,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
           <Typography
-            variant="h3"
+            variant="h5"
             component="h1"
-            sx={{ mb: 2, textAlign: 'center' }}>
+            sx={{
+              mb: 2,
+              textAlign: 'center',
+            }}>
             Plataforma de estimación de precios de mercado de departamentos en
             la Ciudad de México.
           </Typography>
+          <Image
+            src={skyline}
+            alt="Skyline de la Ciudad de México"
+            layout="responsive"
+            style={{
+              border: '1px solid #000',
+              borderRadius: '15px',
+              marginBottom: '1rem',
+            }}
+          />
           <Box sx={{ maxWidth: 'md' }}>
             <Typography variant="body1" gutterBottom>
               Para entender cómo se comportan los precios de las propiedades en
@@ -125,7 +138,7 @@ export default function PaginaEstadisticas() {
             flexDirection: 'column',
           }}>
           <Typography
-            variant="h4"
+            variant="h5"
             component="h2"
             sx={{ mb: 2, textAlign: 'center' }}>
             Gráficas

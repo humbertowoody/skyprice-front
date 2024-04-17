@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { Container, Typography, Box } from '@mui/material';
+import logoIPN from '/public/logo-ipn.png';
+import logoESCOM from '/public/logo-escom.png';
+import Image from 'next/image';
 
 export const Creditos: React.FC = () => (
   <Container sx={{ mt: 4, mb: 6 }}>
@@ -33,15 +36,15 @@ export const Creditos: React.FC = () => (
         <strong>Ingeniero en Sistemas Computacionales</strong>.
       </Typography>
 
-      <img
-        src="/logo-ipn.png"
-        alt="Logo del Instituto Politécnico Nacional"
-        height="100"
+      <Image
+        src={logoIPN}
+        alt="Escudo del Instituto Politécnico Nacional"
+        height={100}
       />
-      <img
-        src="/logo-escom.png"
-        alt="Logo de la Escuela Superior de Cómputo"
-        height="100"
+      <Image
+        src={logoESCOM}
+        alt="Escudo de la Escuela Superior de Cómputo"
+        height={100}
       />
     </Box>
 
@@ -70,15 +73,15 @@ export const Creditos: React.FC = () => (
       </Typography>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-        <img
-          src="/logo-ipn.png"
-          alt="Logo del Instituto Politécnico Nacional"
-          height="100"
+        <Image
+          src={logoIPN}
+          alt="Escudo del Instituto Politécnico Nacional"
+          height={100}
         />
-        <img
-          src="/logo-escom.png"
-          alt="Logo de la Escuela Superior de Cómputo"
-          height="100"
+        <Image
+          src={logoESCOM}
+          alt="Escudo de la Escuela Superior de Cómputo"
+          height={100}
         />
       </Box>
     </Box>

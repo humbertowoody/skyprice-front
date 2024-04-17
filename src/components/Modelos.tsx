@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Estadisticas } from '@/types/estadisticas';
@@ -20,145 +20,113 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
       </Typography>
     </Box>
 
-    <Box
-      sx={{
-        mt: 4,
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        gap: 2,
-      }}>
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            Random Forest
-          </Typography>
-          <Typography variant="body2">
-            <strong>RMSE:</strong> {estadisticas.models.random_forest.rmse}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MSE:</strong> {estadisticas.models.random_forest.mse}
-          </Typography>
-          <Typography variant="body2">
-            <strong>CI:</strong> {estadisticas.models.random_forest.ci[0]} -{' '}
-            {estadisticas.models.random_forest.ci[1]}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MAE:</strong> {estadisticas.models.random_forest.mae}
-          </Typography>
-          <Typography variant="body2">
-            <strong>R2:</strong>{' '}
-            {(estadisticas.models.random_forest.r2 * 100).toFixed(2)}%
-          </Typography>
-          <Typography variant="body2">
-            <strong>Importancia de características:</strong>{' '}
-            {estadisticas.models.random_forest.feature_importances.map(
-              (importance, index) => (
-                <span key={index}>
-                  {importance.toFixed(2)}
-                  {index <
-                  estadisticas.models.random_forest.feature_importances.length -
-                    1
-                    ? ', '
-                    : ''}
-                </span>
-              ),
-            )}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Max features:</strong>{' '}
-            {estadisticas.models.random_forest.max_features}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Max depth:</strong>{' '}
-            {estadisticas.models.random_forest.max_depth}
-          </Typography>
-          <Typography variant="body2">
-            <strong>N estimators:</strong>{' '}
-            {estadisticas.models.random_forest.n_estimators}
-          </Typography>
-          <Typography variant="body2">
-            <strong>OOB score:</strong>{' '}
-            {estadisticas.models.random_forest.oob_score ? 'Sí' : 'No'}
-          </Typography>
-        </CardContent>
-      </Card>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+          <CardContent>
+            <Typography variant="h6" component="div">
+              Random Forest
+            </Typography>
+            <Typography variant="body2">
+              El modelo <strong>Random Forest</strong>, conocido por su
+              capacidad para manejar múltiples tipos de datos y su resistencia
+              al <i>sobreajuste</i>, muestra un <strong>RMSE</strong> de{' '}
+              <strong>{estadisticas.models.random_forest.rmse}</strong>,
+              indicativo de un error medio bajo. Utiliza{' '}
+              <strong>{estadisticas.models.random_forest.n_estimators}</strong>{' '}
+              árboles de decisión, cada uno con un máximo de{' '}
+              <strong>{estadisticas.models.random_forest.max_features}</strong>{' '}
+              características consideradas, proporcionando una robustez
+              considerable al modelo. El <strong>R2</strong> de{' '}
+              <strong>
+                {(estadisticas.models.random_forest.r2 * 100).toFixed(2)}%
+              </strong>{' '}
+              refleja una capacidad predictiva efectiva. La puntuación{' '}
+              <i>OOB</i> (
+              {estadisticas.models.random_forest.oob_score
+                ? 'activa'
+                : 'inactiva'}
+              ) ayuda a evaluar la precisión sin necesidad de validación cruzada
+              separada. Importancias de características como{' '}
+              <i>
+                {estadisticas.models.random_forest.feature_importances.map(
+                  (importance, index) =>
+                    `${importance.toFixed(2)}${
+                      index <
+                      estadisticas.models.random_forest.feature_importances
+                        .length -
+                        1
+                        ? ', '
+                        : ''
+                    }`,
+                )}
+              </i>{' '}
+              informan sobre la contribución de cada variable al modelo.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
 
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            SVM
-          </Typography>
-          <Typography variant="body2">
-            <strong>RMSE:</strong> {estadisticas.models.svm.rmse}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MSE:</strong> {estadisticas.models.svm.mse}
-          </Typography>
-          <Typography variant="body2">
-            <strong>CI:</strong> {estadisticas.models.svm.ci[0]} -{' '}
-            {estadisticas.models.svm.ci[1]}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MAE:</strong> {estadisticas.models.svm.mae}
-          </Typography>
-          <Typography variant="body2">
-            <strong>R2:</strong> {estadisticas.models.svm.r2}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Kernel:</strong> {estadisticas.models.svm.kernel}
-          </Typography>
-          <Typography variant="body2">
-            <strong>C:</strong> {estadisticas.models.svm.C}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Epsilon:</strong> {estadisticas.models.svm.epsilon}
-          </Typography>
-        </CardContent>
-      </Card>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+          <CardContent>
+            <Typography variant="h6" component="div">
+              SVM
+            </Typography>
 
-      <Card variant="outlined" sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            Red Neuronal
-          </Typography>
-          <Typography variant="body2">
-            <strong>RMSE:</strong> {estadisticas.models.neural_network.rmse}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MSE:</strong>{' '}
-            {(estadisticas.models.neural_network.mse * 100).toFixed(2)}%
-          </Typography>
-          <Typography variant="body2">
-            <strong>CI:</strong> {estadisticas.models.neural_network.ci[0]} -{' '}
-            {estadisticas.models.neural_network.ci[1]}
-          </Typography>
-          <Typography variant="body2">
-            <strong>MAE:</strong> {estadisticas.models.neural_network.mae}
-          </Typography>
-          <Typography variant="body2">
-            <strong>R2:</strong>{' '}
-            {(estadisticas.models.neural_network.r2 * 100).toFixed(2)}%
-          </Typography>
-          <Typography variant="body2">
-            <strong>Learning rate:</strong>{' '}
-            {estadisticas.models.neural_network.learning_rate}%
-          </Typography>
-          <Typography variant="body2">
-            <strong>Beta 1:</strong>{' '}
-            {estadisticas.models.neural_network.beta_1.toFixed(2)}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Beta 2:</strong>{' '}
-            {estadisticas.models.neural_network.beta_2.toFixed(2)}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Epsilon:</strong>{' '}
-            {estadisticas.models.neural_network.epsilon.toFixed(2)}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
+            <Typography variant="body2">
+              El <strong>SVM</strong> (Máquinas de Vectores de Soporte) utiliza
+              un kernel <i>{estadisticas.models.svm.kernel}</i>, ideal para
+              capturar relaciones no lineales entre características. El{' '}
+              <strong>R2</strong> actual es de{' '}
+              <strong>{estadisticas.models.svm.r2}</strong>, y se manejan
+              parámetros como <strong>C ({estadisticas.models.svm.C})</strong> y{' '}
+              <i>epsilon ({estadisticas.models.svm.epsilon})</i>, que determinan
+              el margen de error y la suavidad de la frontera de decisión,
+              respectivamente. Los valores de <strong>MSE</strong> y{' '}
+              <strong>RMSE</strong> reflejan la precisión y consistencia del
+              modelo en la estimación de precios.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+          <CardContent>
+            <Typography variant="h6" component="div">
+              Red Neuronal
+            </Typography>
+
+            <Typography variant="body2">
+              La <strong>Red Neuronal</strong> emplea un ritmo de aprendizaje de{' '}
+              <strong>
+                {estadisticas.models.neural_network.learning_rate}
+              </strong>
+              , con parámetros de optimización <i>beta1</i> y <i>beta2</i>{' '}
+              ajustados a{' '}
+              <strong>
+                {estadisticas.models.neural_network.beta_1.toFixed(2)}
+              </strong>{' '}
+              y{' '}
+              <strong>
+                {estadisticas.models.neural_network.beta_2.toFixed(2)}
+              </strong>
+              , respectivamente. Estos ajustes son cruciales para el control del
+              descenso del gradiente durante el entrenamiento. Con un{' '}
+              <strong>RMSE</strong> de{' '}
+              <strong>{estadisticas.models.neural_network.rmse}</strong>, el
+              modelo muestra su eficacia en ajustarse y predecir con alta
+              precisión. La métrica <strong>R2</strong> de{' '}
+              <strong>
+                {(estadisticas.models.neural_network.r2 * 100).toFixed(2)}%
+              </strong>{' '}
+              destaca su capacidad predictiva en el contexto de precios de
+              propiedades.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   </Container>
 );
