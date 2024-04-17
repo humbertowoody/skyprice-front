@@ -82,7 +82,7 @@ export default function PaginaEstadisticas() {
   return (
     <React.Fragment>
       <Head>
-        <title>SkyPrice</title>
+        <title>SkyPrice | Acerca De</title>
         <meta property="og:title" content="SkyPrice" key="title" />
         <meta
           name="description"
@@ -115,10 +115,6 @@ export default function PaginaEstadisticas() {
       <Container
         sx={{
           mt: 2,
-          //display: 'flex',
-          //flexDirection: 'column',
-          //justifyContent: 'center',
-          //alignItems: 'center',
         }}>
         <Typography
           variant="h4"

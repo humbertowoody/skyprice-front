@@ -4,66 +4,86 @@ import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar';
 import FormularioPrediccion from '@/components/FormularioPrediccion';
 import skyline from '/public/skyline-cdmx-sm.jpg';
-import Head from 'next/head';
+import { Metadata } from 'next';
+
+// Metadata for SEO
+export const metadata: Metadata = {
+  metadataBase: new URL('https://skyprice.xyz'),
+  title: 'SkyPrice',
+  description: 'Estima el precio de tu departamento en la Ciudad de México',
+  keywords: 'precio, departamento, cdmx, ciudad de méxico, estimación',
+  applicationName: 'SkyPrice',
+  referrer: 'origin-when-cross-origin',
+  creator: 'Humberto Alejandro Ortega Alcocer',
+  publisher: 'Humberto Alejandro Ortega Alcocer',
+  authors: [
+    {
+      name: 'Humberto Alejandro Ortega Alcocer',
+      url: 'https://humbertowoody.xyz',
+    },
+  ],
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SkyPrice',
+    description: 'Estima el precio de tu departamento en la Ciudad de México',
+    siteId: '1467726470533754880',
+    creator: '@humbertowoody',
+    creatorId: '1467726470533754880',
+  },
+  openGraph: {
+    title: 'SkyPrice',
+    description: 'Estima el precio de tu departamento en la Ciudad de México',
+    url: 'https://skyprice.xyz',
+    siteName: 'SkyPrice',
+    locale: 'ex_MX',
+    type: 'website',
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default function Estimacion() {
   return (
-    <>
-      <Head>
-        <title>SkyPrice</title>
-        <meta property="og:title" content="SkyPrice" key="title" />
-        <meta
-          name="description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta
-          property="og:description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://skyprice.xyz" />
-        <meta
-          property="og:image"
-          content="https://skyprice.xyz/skyline-cdmx-sm.jpg"
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SkyPrice" />
-        <meta
-          name="twitter:description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta
-          name="twitter:image"
-          content="https://skyprice.xyz/skyline-cdmx-sm.jpg"
-        />
-      </Head>
-      <Box
-        sx={{
-          minHeight: '100vh',
-          backgroundImage:
-            //'url(https://source.unsplash.com/random?architecture+cdmx)',
-            `url(${skyline.src})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
-        <NavBar />
-        <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          style={{ minHeight: '80vh' }}>
-          <Grid item xs={12} md={8}>
-            <FormularioPrediccion />
-          </Grid>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        backgroundImage:
+          //'url(https://source.unsplash.com/random?architecture+cdmx)',
+          `url(${skyline.src})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}>
+      <NavBar />
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        style={{ minHeight: '80vh' }}>
+        <Grid item xs={12} md={8}>
+          <FormularioPrediccion />
         </Grid>
-        <Footer />
-      </Box>
-    </>
+      </Grid>
+      <Footer />
+    </Box>
   );
 }
