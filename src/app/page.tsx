@@ -10,14 +10,15 @@ export default function Estimacion() {
     <Box
       sx={{
         minHeight: '100vh',
-        //backgroundImage: 'url(https://source.unsplash.com/random?real-estate)',
-        backgroundImage: `url(${skyline.src})`,
+        backgroundImage:
+          //'url(https://source.unsplash.com/random?architecture+cdmx)',
+          `url(${skyline.src})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between', // Centra el formulario y añade espacio para el footer
+        justifyContent: 'space-between',
       }}>
       <NavBar />
       <Grid

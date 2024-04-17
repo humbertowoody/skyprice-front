@@ -16,8 +16,8 @@ export const Datos: React.FC<{ estadisticas: Estadisticas }> = ({
     <Typography variant="h5" component="h2" sx={{ mt: 4 }}>
       Datos
     </Typography>
-    <Box sx={{ maxWidth: 'sm' }}>
-      <Typography variant="body1" gutterBottom>
+    <Box sx={{ maxWidth: 'sm', mb: 3 }}>
+      <Typography variant="body1" textAlign="justify">
         Para el entrenamiento de los estadisticas.se utilizaron conjuntos de
         datos obtenidos de plataformas de venta de propiedades en la Ciudad de
         México. Los datos fueron preprocesados y limpiados para obtener un

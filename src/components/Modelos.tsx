@@ -11,8 +11,8 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
     <Typography variant="h5" component="h2" sx={{ mt: 4 }}>
       Modelos
     </Typography>
-    <Box sx={{ maxWidth: 'sm' }}>
-      <Typography variant="body1" gutterBottom>
+    <Box sx={{ maxWidth: 'sm', mb: 3 }}>
+      <Typography variant="body1" textAlign="justify">
         En esta sección se muestran las estadísticas de los modelos entrenados
         para la estimación de precios de propiedades. Los modelos fueron
         entrenados con diferentes configuraciones y parámetros para obtener el

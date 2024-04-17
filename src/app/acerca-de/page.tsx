@@ -101,19 +101,27 @@ export default function PaginaEstadisticas() {
             SkyPrice, plataforma de estimación de precios de mercado de
             departamentos en la Ciudad de México.
           </Typography>
-          <Image
-            src={skyline}
-            alt="Skyline de la Ciudad de México"
-            style={{
-              width: '100%',
-              height: 'auto',
-              border: '1px solid #000',
-              borderRadius: '15px',
-              marginBottom: '1rem',
-            }}
-          />
-          <Box sx={{ maxWidth: 'md' }}>
-            <Typography variant="body1" gutterBottom>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 1,
+              p: 2,
+            }}>
+            <Image
+              src={skyline}
+              alt="Skyline de la Ciudad de México"
+              style={{
+                width: 'auto',
+                height: '300px',
+                border: '1px solid #000',
+                borderRadius: '15px',
+                margin: '0 1rem 1rem 0',
+              }}
+            />
+            <Typography variant="body1" textAlign="justify" gutterBottom>
               Para entender cómo se comportan los precios de las propiedades en
               la Ciudad de México se desarrolló una plataforma de estimación de
               precios de mercado de departamentos en la Ciudad de México. La
