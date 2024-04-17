@@ -28,12 +28,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'SkyPrice',
     description: 'Estima el precio de tu departamento en la Ciudad de México',
-    siteId: '1467726470533754880',
     creator: '@humbertowoody',
-    creatorId: '1467726470533754880',
+    site: '@humbertowoody',
+    images: ['https://skyprice.xyz/skyline-cdmx-sm.jpg'],
   },
   openGraph: {
     title: 'SkyPrice',
@@ -42,6 +42,14 @@ export const metadata: Metadata = {
     siteName: 'SkyPrice',
     locale: 'ex_MX',
     type: 'website',
+    images: [
+      {
+        url: 'https://skyprice.xyz/skyline-cdmx-sm.jpg',
+        width: 1024,
+        height: 768,
+        alt: 'Skyline Ciudad de México',
+      },
+    ],
   },
   robots: {
     index: false,
