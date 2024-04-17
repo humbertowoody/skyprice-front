@@ -11,7 +11,6 @@ import { Modelos } from '@/components/Modelos';
 import { Datos } from '@/components/Datos';
 import Image from 'next/image';
 import skyline from '/public/skyline-cdmx-sm.jpg';
-import Head from 'next/head';
 
 export default function PaginaEstadisticas() {
   // URL de la API
@@ -81,36 +80,6 @@ export default function PaginaEstadisticas() {
   // Renderizar la página
   return (
     <React.Fragment>
-      <Head>
-        <title>SkyPrice | Acerca De</title>
-        <meta property="og:title" content="SkyPrice" key="title" />
-        <meta
-          name="description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta
-          property="og:description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://skyprice.xyz" />
-        <meta
-          property="og:image"
-          content="https://skyprice.xyz/skyline-cdmx-sm.jpg"
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SkyPrice" />
-        <meta
-          name="twitter:description"
-          content="SkyPrice es una herramienta para estimar el precio de un departamento en la Ciudad de México."
-        />
-        <meta
-          name="twitter:image"
-          content="https://skyprice.xyz/skyline-cdmx-sm.jpg"
-        />
-      </Head>
       <NavBar />
       <Container
         sx={{
