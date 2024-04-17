@@ -22,12 +22,12 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
 
     <Grid container spacing={2}>
       <Grid item xs={12} md={4}>
-        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" component="div">
               Random Forest
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body2" textAlign="justify">
               El modelo <strong>Random Forest</strong>, conocido por su
               capacidad para manejar múltiples tipos de datos y su resistencia
               al <i>sobreajuste</i>, muestra un <strong>RMSE</strong> de{' '}
@@ -68,13 +68,13 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" component="div">
               SVM
             </Typography>
 
-            <Typography variant="body2">
+            <Typography variant="body2" textAlign="justify">
               El <strong>SVM</strong> (Máquinas de Vectores de Soporte) utiliza
               un kernel <i>{estadisticas.models.svm.kernel}</i>, ideal para
               capturar relaciones no lineales entre características. El{' '}
@@ -92,16 +92,16 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <Card variant="outlined" sx={{ maxWidth: 345 }}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" component="div">
               Red Neuronal
             </Typography>
 
-            <Typography variant="body2">
+            <Typography variant="body2" textAlign="justify">
               La <strong>Red Neuronal</strong> emplea un ritmo de aprendizaje de{' '}
               <strong>
-                {estadisticas.models.neural_network.learning_rate}
+                {estadisticas.models.neural_network.learning_rate.toFixed(5)}
               </strong>
               , con parámetros de optimización <i>beta1</i> y <i>beta2</i>{' '}
               ajustados a{' '}
@@ -115,8 +115,10 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
               , respectivamente. Estos ajustes son cruciales para el control del
               descenso del gradiente durante el entrenamiento. Con un{' '}
               <strong>RMSE</strong> de{' '}
-              <strong>{estadisticas.models.neural_network.rmse}</strong>, el
-              modelo muestra su eficacia en ajustarse y predecir con alta
+              <strong>
+                {estadisticas.models.neural_network.rmse.toFixed(2)}
+              </strong>
+              , el modelo muestra su eficacia en ajustarse y predecir con alta
               precisión. La métrica <strong>R2</strong> de{' '}
               <strong>
                 {(estadisticas.models.neural_network.r2 * 100).toFixed(2)}%

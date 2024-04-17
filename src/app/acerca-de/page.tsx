@@ -91,20 +91,22 @@ export default function PaginaEstadisticas() {
             alignItems: 'center',
           }}>
           <Typography
-            variant="h5"
+            variant="h4"
             component="h1"
             sx={{
               mb: 2,
               textAlign: 'center',
+              fontWeight: '600',
             }}>
-            Plataforma de estimación de precios de mercado de departamentos en
-            la Ciudad de México.
+            SkyPrice, plataforma de estimación de precios de mercado de
+            departamentos en la Ciudad de México.
           </Typography>
           <Image
             src={skyline}
             alt="Skyline de la Ciudad de México"
-            layout="responsive"
             style={{
+              width: '100%',
+              height: 'auto',
               border: '1px solid #000',
               borderRadius: '15px',
               marginBottom: '1rem',
