@@ -10,6 +10,10 @@ import {
   Card,
   CardContent,
   InputAdornment,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -117,12 +121,12 @@ export default function PredictionForm() {
       Bathrooms: '',
       Parking: '',
       Age: '',
-      Lat: '',
-      Lng: '',
+      //Lat: '',
+      //Lng: '',
       Municipality: '',
       // Centro de la CDMX
-      //Lat: 19.4326,
-      //Lng: -99.1332,
+      Lat: 19.4326,
+      Lng: -99.1332,
       //Municipality: 'Cuauhtémoc',
     },
     validationSchema: validationSchema,
@@ -442,26 +446,60 @@ export default function PredictionForm() {
               }}
             />
           </Grid>
-          {/* Componente mostrando el texto de Municipality pero diciendo 'Alcaldía' */}
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <TextField
-              fullWidth
-              required
-              id="Municipality"
-              name="Municipality"
-              label="Alcaldía"
-              disabled
-              value={formik.values.Municipality}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.Municipality &&
-                Boolean(formik.errors.Municipality)
-              }
-              helperText={
-                formik.touched.Municipality && formik.errors.Municipality
-              }
-              margin="normal"
-            />
+
+          {/* Select de Municipality con el valor seleccionado acorde al estado (por si el autocomplete actualiza el valor) */}
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            alignItems={'flex-end'}
+            display={'flex'}>
+            <FormControl fullWidth sx={{ mb: 1 }}>
+              <InputLabel
+                disabled={
+                  formik.values.Municipality !== null &&
+                  formik.values.Municipality !== ''
+                }>
+                Alcaldía
+              </InputLabel>
+              <Select
+                fullWidth
+                id="Municipality"
+                name="Municipality"
+                label="Alcaldía2"
+                value={
+                  formik.values.Municipality === null ||
+                  formik.values.Municipality === ''
+                    ? ''
+                    : formik.values.Municipality
+                }
+                onChange={formik.handleChange}
+                disabled={
+                  formik.values.Municipality !== null &&
+                  formik.values.Municipality !== ''
+                }
+                error={
+                  formik.touched.Municipality &&
+                  Boolean(formik.errors.Municipality)
+                }>
+                <MenuItem key={''} value={''} disabled>
+                  Seleccione una alcaldía
+                </MenuItem>
+                {alcaldias.map((alcaldia: string) => (
+                  <MenuItem key={alcaldia} value={alcaldia}>
+                    {alcaldia}
+                  </MenuItem>
+                ))}
+              </Select>
+              {formik.touched.Municipality && formik.errors.Municipality && (
+                <Typography variant="body2" color="red" gutterBottom>
+                  {formik.errors.Municipality}
+                </Typography>
+              )}
+            </FormControl>
           </Grid>
 
           {alcaldias.includes(formik.values.Municipality) && (
