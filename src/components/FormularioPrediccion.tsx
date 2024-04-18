@@ -548,39 +548,38 @@ export default function PredictionForm() {
           </Grid>
 
           {alcaldias.includes(formik.values?.Municipality) &&
-            formik.values?.Lat &&
-            formik.values?.Lng && (
-              <Grid item xs={12}>
-                <GoogleMap
-                  mapContainerStyle={{
-                    width: '100%',
-                    height: '300px',
-                  }}
-                  center={{
+          !!formik.values?.Lat &&
+          !!formik.values?.Lng ? (
+            <Grid item xs={12}>
+              <GoogleMap
+                mapContainerStyle={{
+                  width: '100%',
+                  height: '300px',
+                }}
+                center={{
+                  lat: Number(formik.values.Lat),
+                  lng: Number(formik.values.Lng),
+                }}
+                zoom={15}>
+                <Marker
+                  title="Ubicación de la Propiedad"
+                  position={{
                     lat: Number(formik.values.Lat),
                     lng: Number(formik.values.Lng),
                   }}
-                  zoom={15}>
-                  <Marker
-                    title="Ubicación de la Propiedad"
-                    position={{
-                      lat: Number(formik.values.Lat),
-                      lng: Number(formik.values.Lng),
-                    }}
-                    animation={google.maps.Animation.BOUNCE}
-                    icon={{
-                      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                      scale: 10,
-                      fillColor: 'red',
-                      fillOpacity: 0.8,
-                      strokeColor: 'black',
-                      strokeWeight: 3,
-                    }}
-                  />
-                </GoogleMap>
-              </Grid>
-            )}
-          {!alcaldias.includes(formik.values?.Municipality) && (
+                  animation={google.maps.Animation.BOUNCE}
+                  icon={{
+                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                    scale: 10,
+                    fillColor: 'red',
+                    fillOpacity: 0.8,
+                    strokeColor: 'black',
+                    strokeWeight: 3,
+                  }}
+                />
+              </GoogleMap>
+            </Grid>
+          ) : (
             <Grid item xs={12}>
               <Typography variant="body2" align="center">
                 Por favor escribe una dirección válida dentro de la CDMX para
