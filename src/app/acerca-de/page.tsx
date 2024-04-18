@@ -100,6 +100,7 @@ export default function PaginaEstadisticas() {
   return (
     <React.Fragment>
       <NavBar />
+
       <Container
         sx={{
           mt: 2,
@@ -112,8 +113,8 @@ export default function PaginaEstadisticas() {
             textAlign: 'center',
             fontWeight: '600',
           }}>
-          SkyPrice, plataforma de estimación de precios de mercado de
-          departamentos en la Ciudad de México.
+          <strong>SkyPrice</strong>, la plataforma de estimación de precios de
+          departamentos en la Ciudad de México
         </Typography>
         <Box
           sx={{
