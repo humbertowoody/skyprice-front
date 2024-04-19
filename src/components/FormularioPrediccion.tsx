@@ -294,10 +294,12 @@ export default function PredictionForm() {
     return (
       <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
         <Typography variant="h5" align="center" gutterBottom>
-          Estimar Precio de Departamento en CDMX
+          <strong>SkyPrice</strong>, estimar el precio de departamentos en la
+          CDMX
         </Typography>
         <Typography variant="body2" color="gray" align="center">
-          Cargando estimador de precios...
+          Cargando <strong>SkyPrice</strong> y todas sus funcionalidades. Por
+          favor, espera un momento...
         </Typography>
       </Paper>
     );
@@ -647,7 +649,7 @@ export default function PredictionForm() {
               {Object.entries(predictions).map(
                 ([key, value]): ReactElement => (
                   <Grid key={key} item xs={12} sm={4}>
-                    <Card sx={{ textAlign: 'center' }}>
+                    <Card sx={{ textAlign: 'center' }} elevation={4}>
                       <CardContent>
                         <Typography variant="body1">
                           Venta:{' '}
@@ -683,10 +685,11 @@ export default function PredictionForm() {
                           justifyContent: 'center',
                           alignItems: 'center',
                           p: 2,
-                          borderTop: 1,
                         }}>
                         <Typography variant="body2" color="text.secondary">
-                          {key.replace(/_/g, ' ').toUpperCase()}
+                          Algoritmo: {key === 'svm' && 'SVM'}
+                          {key === 'random_forest' && 'Random Forest'}
+                          {key === 'neural_network' && 'Redes Neuronales'}
                         </Typography>
                       </Box>
                     </Card>
