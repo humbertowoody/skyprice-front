@@ -3,9 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar';
 import FormularioPrediccion from '@/components/FormularioPrediccion';
-import skyline from '/public/skyline-cdmx-sm.jpg';
 import skyline2 from '/public/skyline-cdmx-2.jpeg';
-import reforma from '/public/reforma-sm.jpg';
 import Link from 'next/link';
 
 export default function Estimacion() {

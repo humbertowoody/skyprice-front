@@ -21,6 +21,7 @@ import swaggerlogo from '/public/swagger-logo.png';
 import redoclogo from '/public/redoc-logo.png';
 import reformasm from '/public/reforma-sm.jpg';
 import Link from 'next/link';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
 
 export default function PaginaEstadisticas() {
   // URL de la API
@@ -207,11 +208,12 @@ export default function PaginaEstadisticas() {
             my: 4,
             display: 'flex',
             flexDirection: 'column',
+            gap: 2,
+            alignItems: 'center',
           }}>
-          <Box
-            sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
             <AutoGraphIcon sx={{ fontSize: 30, color: 'primary.main' }} />
-            <Typography variant="h6" component="div">
+            <Typography variant="h5" component="div">
               Gráficas de los modelos
             </Typography>
           </Box>
@@ -222,6 +224,16 @@ export default function PaginaEstadisticas() {
               style={{ width: '100%', height: 'auto' }}
             />
           </Box>
+          {/*Botón para abrir las gráficas en otra pestaña*/}
+          <Link href={`${URL}/plots`} target="_blank" rel="noopener" passHref>
+            <Button
+              variant="outlined"
+              endIcon={<OpenInNewIcon />}
+              startIcon={<ZoomInIcon />}
+              sx={{ mt: 2, textTransform: 'none' }}>
+              Ver gráficas en otra pestaña
+            </Button>
+          </Link>
         </Box>
       </Container>
 
