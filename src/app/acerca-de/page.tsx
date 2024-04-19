@@ -10,14 +10,17 @@ import { Estadisticas } from '@/types/estadisticas';
 import { Modelos } from '@/components/Modelos';
 import { Datos } from '@/components/Datos';
 import Image from 'next/image';
-import skyline from '/public/skyline-cdmx-sm.jpg';
-import { Paper, Grid, Link } from '@mui/material';
-import DescriptionIcon from '@mui/icons-material/Description';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Paper, Grid, Card, CardContent, CardMedia } from '@mui/material';
 import ApiIcon from '@mui/icons-material/Api';
 import Button from '@mui/material/Button';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import SellIcon from '@mui/icons-material/Sell';
+import swaggerlogo from '/public/swagger-logo.png';
+import redoclogo from '/public/redoc-logo.png';
+import reformasm from '/public/reforma-sm.jpg';
+import Link from 'next/link';
 
 export default function PaginaEstadisticas() {
   // URL de la API
@@ -104,6 +107,7 @@ export default function PaginaEstadisticas() {
       <Container
         sx={{
           mt: 2,
+          mb: 2,
         }}>
         <Typography
           variant="h4"
@@ -123,29 +127,70 @@ export default function PaginaEstadisticas() {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Image
-            src={skyline}
-            alt="Skyline de la Ciudad de México"
-            style={{
-              height: 'auto',
-              width: '100%',
-              maxHeight: '300px',
-              border: '1px solid #000',
-              borderRadius: '15px',
+          <Container
+            sx={{
               flex: 1,
-            }}
-          />
-          <Typography
-            variant="body1"
-            textAlign="justify"
-            sx={{ flex: 1, margin: { xs: '1rem 0', md: '0 1rem' } }}>
-            Para entender cómo se comportan los precios de las propiedades en la
-            Ciudad de México se desarrolló una plataforma de estimación de
-            precios de mercado de departamentos en la Ciudad de México. La
-            plataforma permite a los usuarios estimar el precio de mercado de un
-            departamento en la Ciudad de México de acuerdo a sus
-            características.
-          </Typography>
+            }}>
+            <Card elevation={10}>
+              <CardMedia
+                title="Skyline de la Ciudad de México"
+                image={reformasm.src}
+                component="img"
+              />
+              <CardContent sx={{ textAlign: 'center' }}>
+                <Typography variant="body2">
+                  Paseo de la Reforma, Ciudad de México
+                </Typography>
+                <Typography variant="caption" textAlign="center">
+                  Foto de{' '}
+                  <a href="https://unsplash.com/es/@carlosaranda?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                    carlos aranda
+                  </a>{' '}
+                  en{' '}
+                  <a href="https://unsplash.com/es/fotos/edificios-de-gran-altura-durante-el-dia-pH6iuFEqUu8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                    Unsplash
+                  </a>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Container>
+
+          <Box
+            sx={{
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              my: { xs: 10, md: 2 },
+              mx: { xs: 2, md: 5 },
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Typography variant="h5" component="h2" sx={{ mb: 2, flex: 1 }}>
+              ¿Qué es <strong>SkyPrice</strong>?
+            </Typography>
+            <Typography variant="body1" textAlign="justify" sx={{ flex: 1 }}>
+              <strong>SkyPrice</strong> es una plataforma diseñada para analizar
+              y estimar los precios de propiedades en la Ciudad de México,
+              basándose en un detallado conjunto de datos locales. Utilizando
+              técnicas de aprendizaje automático como{' '}
+              <strong>Random Forest</strong>,{' '}
+              <strong>Máquina de Vectores de Soporte (SVM)</strong> y{' '}
+              <strong>Redes Neuronales</strong>, ofrece estimaciones precisas
+              del valor de mercado de departamentos según sus características
+              específicas. Adicionalmente, cuenta con una{' '}
+              <strong>API pública</strong> que facilita la integración de sus
+              funcionalidades en otras aplicaciones, ampliando así su
+              aplicabilidad y alcance.
+            </Typography>
+            <Link href="/" passHref>
+              <Button
+                variant="contained"
+                endIcon={<SellIcon />}
+                sx={{ flex: 1, textTransform: 'none', fontWeight: 600, mt: 2 }}>
+                ¡Estima el precio de tu departamento!
+              </Button>
+            </Link>
+          </Box>
         </Box>
       </Container>
 
@@ -163,12 +208,13 @@ export default function PaginaEstadisticas() {
             display: 'flex',
             flexDirection: 'column',
           }}>
-          <Typography
-            variant="h5"
-            component="h2"
-            sx={{ mb: 2, textAlign: 'center' }}>
-            Gráficas
-          </Typography>
+          <Box
+            sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: 'center' }}>
+            <AutoGraphIcon sx={{ fontSize: 30, color: 'primary.main' }} />
+            <Typography variant="h6" component="div">
+              Gráficas de los modelos
+            </Typography>
+          </Box>
           <Box sx={{ maxWidth: 'lg' }}>
             <img
               src={`${URL}/plots`}
@@ -212,25 +258,22 @@ export default function PaginaEstadisticas() {
               mt: 2,
               mb: 3,
             }}>
-            <Typography
-              variant="button"
-              component="div"
-              sx={{
-                mb: 1,
-                fontFamily: 'monospace',
-                backgroundColor: 'grey.100',
-                padding: 1,
-                borderRadius: 1,
-                textTransform: 'lowercase',
-              }}>
-              {URL}
-            </Typography>
             <Button
               variant="outlined"
               startIcon={<ContentCopyIcon />}
               onClick={handleCopy}
-              sx={{ mb: 2 }}>
-              Copiar al portapapeles
+              sx={{
+                mb: 2,
+              }}>
+              <Typography
+                variant="button"
+                component="div"
+                sx={{
+                  fontFamily: 'monospace',
+                  textTransform: 'lowercase',
+                }}>
+                {URL}
+              </Typography>
             </Button>
             {copySuccess && (
               <Typography variant="caption" sx={{ color: 'success.main' }}>
@@ -242,24 +285,31 @@ export default function PaginaEstadisticas() {
           <Grid container spacing={2} justifyContent="center">
             <Grid item xs={12} sm={6} md={4}>
               <Paper elevation={3} sx={{ p: 2 }}>
-                <DescriptionIcon
-                  sx={{ fontSize: 30, color: 'secondary.main' }}
-                />
-                <Typography variant="h6" component="div" sx={{ mt: 1, mb: 1 }}>
-                  Swagger UI
-                </Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    src={swaggerlogo}
+                    alt="Swagger"
+                    width={30}
+                    height={30}
+                    style={{ marginRight: 1 }}
+                  />
+                  <Typography variant="h6">Swagger UI</Typography>
+                </Box>
                 <Typography
                   variant="body2"
                   component="div"
+                  textAlign="justify"
                   sx={{ mt: 1, mb: 1 }}>
                   Swagger UI es una herramienta que permite visualizar y probar
                   los endpoints de una API de manera interactiva.
                 </Typography>
                 <Link href={`${URL}/openapi`} target="_blank" rel="noopener">
-                  <Button
-                    variant="outlined"
-                    startIcon={<OpenInNewIcon />}
-                    sx={{ mb: 2 }}>
+                  <Button startIcon={<OpenInNewIcon />}>
                     Visitar Swagger UI
                   </Button>
                 </Link>
@@ -268,22 +318,28 @@ export default function PaginaEstadisticas() {
 
             <Grid item xs={12} sm={6} md={4}>
               <Paper elevation={3} sx={{ p: 2 }}>
-                <VisibilityIcon sx={{ fontSize: 30, color: 'success.main' }} />
-                <Typography variant="h6" component="div" sx={{ mt: 1, mb: 1 }}>
-                  ReDoc
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Image
+                    src={redoclogo}
+                    alt="ReDoc"
+                    width={30}
+                    height={30}
+                    style={{ marginRight: 1 }}
+                  />
+                  <Typography variant="h6">ReDoc</Typography>
+                </Box>
                 <Typography
                   variant="body2"
                   component="div"
+                  textAlign="justify"
                   sx={{ mt: 1, mb: 1 }}>
                   ReDoc es una herramienta de documentación de APIs para
                   visualizar la documentación de una API.
                 </Typography>
                 <Link href={`${URL}/redoc`} target="_blank" rel="noopener">
                   <Button
-                    variant="outlined"
-                    startIcon={<OpenInNewIcon />}
-                    sx={{ mb: 2 }}>
+                    //variant="outlined"
+                    startIcon={<OpenInNewIcon />}>
                     Visitar ReDoc
                   </Button>
                 </Link>

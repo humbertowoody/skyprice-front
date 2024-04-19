@@ -3,14 +3,26 @@ import { Container, Typography, Box, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Estadisticas } from '@/types/estadisticas';
+import InsightsIcon from '@mui/icons-material/Insights';
+import ForestIcon from '@mui/icons-material/Forest';
+import HubIcon from '@mui/icons-material/Hub';
+import LinearScaleIcon from '@mui/icons-material/LinearScale';
 
 export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
   estadisticas,
 }) => (
   <Container sx={{ mt: 4 }}>
-    <Typography variant="h5" component="h2" sx={{ mt: 4 }}>
-      Modelos
-    </Typography>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: 2,
+        mt: 4,
+      }}>
+      <InsightsIcon sx={{ fontSize: 30, color: 'primary.main' }} />
+      <Typography variant="h5" component="h2" gutterBottom>
+        Modelos
+      </Typography>
+    </Box>
     <Box sx={{ maxWidth: 'sm', mb: 3 }}>
       <Typography variant="body1" textAlign="justify">
         En esta sección se muestran las estadísticas de los modelos entrenados
@@ -22,11 +34,20 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
 
     <Grid container spacing={2}>
       <Grid item xs={12} md={4}>
-        <Card variant="outlined">
+        <Card elevation={2}>
           <CardContent>
-            <Typography variant="h6" component="div">
-              Random Forest
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'center',
+                mb: 2,
+              }}>
+              <ForestIcon sx={{ fontSize: 30, color: 'success.dark' }} />
+              <Typography variant="h6" component="div">
+                Random Forest
+              </Typography>
+            </Box>
             <Typography variant="body2" textAlign="justify">
               El modelo <strong>Random Forest</strong>, conocido por su
               capacidad para manejar múltiples tipos de datos y su resistencia
@@ -68,11 +89,15 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <Card variant="outlined">
+        <Card elevation={2}>
           <CardContent>
-            <Typography variant="h6" component="div">
-              SVM
-            </Typography>
+            <Box
+              sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 2 }}>
+              <LinearScaleIcon sx={{ fontSize: 30, color: 'warning.dark' }} />
+              <Typography variant="h6" component="div">
+                SVM
+              </Typography>
+            </Box>
 
             <Typography variant="body2" textAlign="justify">
               El <strong>SVM</strong> (Máquinas de Vectores de Soporte) utiliza
@@ -92,11 +117,20 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <Card variant="outlined">
+        <Card elevation={2}>
           <CardContent>
-            <Typography variant="h6" component="div">
-              Red Neuronal
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'center',
+                mb: 2,
+              }}>
+              <HubIcon sx={{ fontSize: 30, color: 'info.dark' }} />
+              <Typography variant="h6" component="div">
+                Red Neuronal
+              </Typography>
+            </Box>
 
             <Typography variant="body2" textAlign="justify">
               La <strong>Red Neuronal</strong> emplea un ritmo de aprendizaje de{' '}

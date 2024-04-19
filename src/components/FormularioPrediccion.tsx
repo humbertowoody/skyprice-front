@@ -306,7 +306,7 @@ export default function PredictionForm() {
   return (
     <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
       <Typography variant="h5" align="center" gutterBottom>
-        <strong>SkyPrice</strong>: Estimar Precio de Departamento en CDMX
+        <strong>SkyPrice</strong>, estimar precio de departamentos en la CDMX
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} justifyContent="center">

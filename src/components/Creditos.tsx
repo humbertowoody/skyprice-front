@@ -3,12 +3,21 @@ import { Container, Typography, Box } from '@mui/material';
 import logoIPN from '/public/logo-ipn.png';
 import logoESCOM from '/public/logo-escom.png';
 import Image from 'next/image';
+import AttributionIcon from '@mui/icons-material/Attribution';
 
 export const Creditos: React.FC = () => (
   <Container sx={{ mt: 4, mb: 6 }}>
-    <Typography variant="h6" component="h2" gutterBottom>
-      Créditos
-    </Typography>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: 2,
+        mt: 4,
+      }}>
+      <AttributionIcon sx={{ fontSize: 30, color: 'primary.main' }} />
+      <Typography variant="h5" component="h2" gutterBottom>
+        Créditos
+      </Typography>
+    </Box>
 
     {/* Para pantallas grandes */}
     <Box
