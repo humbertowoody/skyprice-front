@@ -294,8 +294,8 @@ export default function PredictionForm() {
     return (
       <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
         <Typography variant="h5" align="center" gutterBottom>
-          <strong>SkyPrice</strong>, estimar el precio de departamentos en la
-          CDMX
+          <strong>SkyPrice</strong>, estima el precio de tu departamento en la
+          Ciudad de México
         </Typography>
         <Typography variant="body2" color="gray" align="center">
           Cargando <strong>SkyPrice</strong> y todas sus funcionalidades. Por
@@ -308,7 +308,8 @@ export default function PredictionForm() {
   return (
     <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
       <Typography variant="h5" align="center" gutterBottom>
-        <strong>SkyPrice</strong>, estimar precio de departamentos en la CDMX
+        <strong>SkyPrice</strong>, estima el precio de tu departamento en la
+        Ciudad de México
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} justifyContent="center">

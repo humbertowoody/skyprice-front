@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from '@/theme';
 import { Metadata } from 'next';
 import Script from 'next/script';
-import reformasm from '/public/reforma-sm.jpg';
+import skylinecdmxxs from '/public/skyline-cdmx-xs.jpg';
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: 'Estima el precio de tu departamento en la Ciudad de México',
     creator: '@humbertowoody',
     site: '@humbertowoody',
-    images: [`https://skyprice.xyz${reformasm.src}`],
+    images: [`https://skyprice.xyz${skylinecdmxxs.src}`],
   },
   openGraph: {
     title: 'SkyPrice',
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `https://skyprice.xyz${reformasm.src}`,
-        width: 4600,
-        height: 3448,
+        url: `https://skyprice.xyz${skylinecdmxxs.src}`,
+        width: 640,
+        height: 640,
         alt: 'SkyPrice, estima el precio de tu departamento en la Ciudad de México',
       },
     ],
