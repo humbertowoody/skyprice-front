@@ -388,7 +388,7 @@ export default function PredictionForm() {
                 formik.touched.Size_Terrain && formik.errors.Size_Terrain
               }
               margin="normal"
-              inputProps={{ step: 5, min: 10, max: 1000 }}
+              inputProps={{ step: 1, min: 10, max: 1000 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">m²</InputAdornment>
@@ -416,7 +416,7 @@ export default function PredictionForm() {
                 formik.errors.Size_Construction
               }
               margin="normal"
-              inputProps={{ step: 5, min: 10, max: 1000 }}
+              inputProps={{ step: 1, min: 10, max: 1000 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">m²</InputAdornment>
