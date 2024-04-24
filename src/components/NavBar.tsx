@@ -14,8 +14,12 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import InfoIcon from '@mui/icons-material/Info';
+import LanguageSelector from './LanguageSelector';
+import { useTranslation } from '../app/i18nContext';
 
 export default function NavBar() {
+  const { t } = useTranslation();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -65,6 +69,7 @@ export default function NavBar() {
 
             {/* Para pantallas medianas y grandes */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+              <LanguageSelector />
               <Button
                 color="inherit"
                 component={Link}
@@ -73,7 +78,7 @@ export default function NavBar() {
                   fontWeight: 600,
                   textTransform: 'none',
                 }}>
-                Estimación de Precio
+                {t('navbar.prediction')}
               </Button>
               <Button
                 color="inherit"
@@ -83,12 +88,13 @@ export default function NavBar() {
                   fontWeight: 600,
                   textTransform: 'none',
                 }}>
-                Acerca de
+                {t('navbar.about')}
               </Button>
             </Box>
 
             {/* Para pantallas pequeñas */}
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+              <LanguageSelector />
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -122,7 +128,7 @@ export default function NavBar() {
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <MonetizationOnIcon sx={{ mr: 1 }} />{' '}
                     <Typography textAlign="center">
-                      Estimación de Precio
+                      {t('navbar.prediction')}
                     </Typography>
                   </Box>
                 </MenuItem>
@@ -132,7 +138,9 @@ export default function NavBar() {
                   href="/acerca-de">
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <InfoIcon sx={{ mr: 1 }} />{' '}
-                    <Typography textAlign="center">Acerca de</Typography>
+                    <Typography textAlign="center">
+                      {t('navbar.about')}
+                    </Typography>
                   </Box>
                 </MenuItem>
               </Menu>

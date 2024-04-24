@@ -29,6 +29,7 @@ import AddLocationIcon from '@mui/icons-material/AddLocation';
 import Image from 'next/image';
 import departamentoIsometrico from '/public/departamento-isometrico.svg';
 import CurrencyConverter from './CurrencyConverter';
+import { useTranslation } from '../app/i18nContext';
 
 // Declarar un array statico para las librerias de Google Maps
 const libraries: any[] = ['places'];
@@ -146,6 +147,9 @@ export default function PredictionForm() {
     region: 'MX',
     language: 'es',
   });
+
+  // Cargar provider de contexto de internacionalización
+  const { t } = useTranslation();
 
   // Estados del componente
   const [predictions, setPredictions] = useState(null);
@@ -312,8 +316,7 @@ export default function PredictionForm() {
     return (
       <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
         <Typography variant="h5" align="center" gutterBottom>
-          <strong>SkyPrice</strong>, estima el precio de tu departamento en la
-          Ciudad de México
+          <strong>SkyPrice</strong>, {t('predictionForm.title')}
         </Typography>
         <Typography variant="body2" color="gray" align="center">
           Cargando <strong>SkyPrice</strong> y todas sus funcionalidades. Por
@@ -326,8 +329,7 @@ export default function PredictionForm() {
   return (
     <Paper elevation={6} sx={{ margin: 2, padding: 3 }}>
       <Typography variant="h5" align="center" gutterBottom>
-        <strong>SkyPrice</strong>, estima el precio de tu departamento en la
-        Ciudad de México
+        <strong>SkyPrice</strong>, {t('predictionForm.title')}
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} justifyContent="center">
@@ -342,7 +344,6 @@ export default function PredictionForm() {
                 south: 19.1,
               }}
               options={{
-                //types: ['address'],
                 componentRestrictions: {
                   country: 'MX',
                 },

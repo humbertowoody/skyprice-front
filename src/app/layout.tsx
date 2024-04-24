@@ -6,6 +6,7 @@ import theme from '@/theme';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import skylinecdmxxs from '/public/skyline-cdmx-xs.jpg';
+import { I18nProvider } from './i18nContext';
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -88,7 +89,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            {props.children}
+            <I18nProvider>{props.children}</I18nProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

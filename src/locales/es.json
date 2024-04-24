@@ -1,0 +1,9 @@
+{
+  "navbar": {
+    "prediction": "Estimación de precio",
+    "about": "Acerca de"
+  },
+  "predictionForm": {
+    "title": "estima el precio de tu departamento en la Ciudad de México"
+  }
+}

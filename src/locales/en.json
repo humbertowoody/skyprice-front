@@ -1,0 +1,9 @@
+{
+  "navbar": {
+    "prediction": "Estimate price",
+    "about": "About"
+  },
+  "predictionForm": {
+    "title": "estimate the price of your apartment in Mexico City"
+  }
+}
