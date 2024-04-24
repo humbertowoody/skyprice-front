@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import {
   TextField,
   MenuItem,
@@ -55,10 +55,38 @@ const currencies = [
     name: 'CNY',
     flag: '🇨🇳',
   },
+  {
+    name: 'CLP',
+    flag: '🇨🇱',
+  },
+  {
+    name: 'ARS',
+    flag: '🇦🇷',
+  },
+  {
+    name: 'COP',
+    flag: '🇨🇴',
+  },
+  {
+    name: 'KRW',
+    flag: '🇰🇷',
+  },
+  {
+    name: 'INR',
+    flag: '🇮🇳',
+  },
+  {
+    name: 'RUB',
+    flag: '🇷🇺',
+  },
+  {
+    name: 'VES',
+    flag: '🇻🇪',
+  },
 ];
 
 const CurrencyConverter = ({ price }: { price: Number }) => {
-  const [currency, setCurrency] = useState('MXN');
+  const [currency, setCurrency] = useState<string>('MXN');
   const [convertedPrice, setConvertedPrice] = useState<Number>(price);
 
   useEffect(() => {
@@ -99,7 +127,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
   };
 
   const convertedRent6: string =
-    ((convertedPrice * 0.06) / 12).toLocaleString(undefined, {
+    ((Number(convertedPrice) * 0.06) / 12).toLocaleString(undefined, {
       style: 'currency',
       currency,
       currencyDisplay: 'narrowSymbol',
@@ -108,9 +136,10 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
     currency;
 
   const convertedRent4: string =
-    ((convertedPrice * 0.04) / 12).toLocaleString(undefined, {
+    ((Number(convertedPrice) * 0.04) / 12).toLocaleString(undefined, {
       style: 'currency',
       currency,
+      currencyDisplay: 'narrowSymbol',
     }) +
     ' ' +
     currency;
@@ -126,7 +155,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
         })}{' '}
         {currency}
       </Typography>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box display="flex" alignItems="center" justifyContent="space-around">
         <Typography variant="body2" align="center">
           Renta:{' '}
         </Typography>
@@ -139,7 +168,15 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={`${convertedRent6} / mes`}
+                primary={
+                  <Fragment>
+                    {convertedRent6}
+                    <Typography variant="caption" component="span">
+                      {' '}
+                      / mes
+                    </Typography>
+                  </Fragment>
+                }
                 secondary="6% anual"
               />
             </ListItem>
@@ -150,7 +187,15 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={`${convertedRent4} / mes`}
+                primary={
+                  <Fragment>
+                    {convertedRent4}
+                    <Typography variant="caption" component="span">
+                      {' '}
+                      / mes
+                    </Typography>
+                  </Fragment>
+                }
                 secondary="4% anual"
               />
             </ListItem>

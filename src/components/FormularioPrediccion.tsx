@@ -10,9 +10,6 @@ import {
   Card,
   CardContent,
   InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
   MenuItem,
 } from '@mui/material';
 import { useFormik } from 'formik';
@@ -61,16 +58,16 @@ const validationSchema = yup.object({
   Size_Terrain: yup
     .number()
     .required('El tamaño del terreno es requerido')
-    .min(1, 'El tamaño del terreno debe ser mayor o igual a 1'),
+    .min(10, 'El tamaño del terreno debe ser mayor o igual a 10'),
   Size_Construction: yup
     .number()
     .required('El tamaño de la construcción es requerido')
-    .min(1, 'El tamaño de la construcción debe ser mayor o igual a 1'),
+    .min(10, 'El tamaño de la construcción debe ser mayor o igual a 10'),
   Rooms: yup
     .number()
     .required('El número de habitaciones es requerido')
     .integer()
-    .min(1, 'El número de habitaciones debe ser mayor o igual a 1')
+    .min(0, 'El número de habitaciones debe ser mayor o igual a 0')
     .max(10, 'El número de habitaciones debe ser menor o igual a 10'),
   // Validar que los baños sean un número en pasos de 0.5 y mayor a 1 (mínimo 1 baño)
   Bathrooms: yup
@@ -106,25 +103,33 @@ const validationSchema = yup.object({
     .integer()
     .min(0, 'La edad de la propiedad debe ser mayor o igual a 0')
     .max(100, 'La edad de la propiedad debe ser menor o igual a 100'),
-  Lat: yup.number().required('La latitud es requerida'),
-  Lng: yup.number().required('La longitud es requerida'),
+  Lat: yup
+    .number()
+    .required('La dirección es requerida')
+    .min(19.1, 'La dirección debe encontrarse dentro de la CDMX')
+    .max(19.7, 'La dirección debe encontrarse dentro de la CDMX'),
+  Lng: yup
+    .number()
+    .required('La dirección es requerida')
+    .min(-99.4, 'La dirección debe encontrarse dentro de la CDMX')
+    .max(-98.9, 'La dirección debe encontrarse dentro de la CDMX'),
   Municipality: yup
     .string()
-    .required('El municipio/alcaldía es requerido')
-    .oneOf(alcaldias, 'El municipio/alcaldía no es válido'),
+    .required('La alcaldía es requerida')
+    .oneOf(alcaldias, 'La alcaldía no es válida'),
 });
 
 // Interfaz para el body de la petición POST a la API
 interface PredictionsForm {
-  Size_Terrain: number;
-  Size_Construction: number;
-  Rooms: number;
-  Bathrooms: number;
-  Parking: number;
-  Age: number;
-  Lat: number;
-  Lng: number;
-  Municipality: string;
+  Size_Terrain?: number;
+  Size_Construction?: number;
+  Rooms?: number;
+  Bathrooms?: number;
+  Parking?: number;
+  Age?: number;
+  Lat?: number;
+  Lng?: number;
+  Municipality?: string;
 }
 
 interface ExtendedPredictionsForm extends PredictionsForm {
@@ -164,40 +169,50 @@ export default function PredictionForm() {
   // Inicializar formulario con useFormik
   const formik = useFormik<PredictionsForm>({
     initialValues: {
-      Size_Terrain: 0,
-      Size_Construction: 0,
-      Rooms: 0,
-      Bathrooms: 0,
-      Parking: 0,
-      Age: 0,
-      Lat: 0,
-      Lng: 0,
-      Municipality: '',
+      Size_Terrain: undefined,
+      Size_Construction: undefined,
+      Rooms: undefined,
+      Bathrooms: undefined,
+      Parking: undefined,
+      Age: undefined,
+      Lat: undefined,
+      Lng: undefined,
+      Municipality: undefined,
     },
+
     validationSchema: validationSchema,
     onSubmit: async (values: PredictionsForm) => {
-      // Realizar llamada a API para obtener predicciones
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/predict`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      try {
+        // Realizar llamada a API para obtener predicciones
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+          }/predict`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
           },
-          body: JSON.stringify(values),
-        },
-      );
+        );
 
-      // Convertir respuesta a JSON
-      const data = await response.json();
+        // Convertir respuesta a JSON
+        const data = await response.json();
 
-      // Actualizar el estado con las predicciones
-      setPredictions(data);
-      setPredictionsForm({
-        address,
-        ...values,
-        fecha: new Date(),
-      });
+        // Actualizar el estado con las predicciones
+        setPredictions(data);
+        setPredictionsForm({
+          address,
+          ...values,
+          fecha: new Date(),
+        });
+      } catch (error) {
+        alert(
+          'Ocurrió un error al estimar el precio de la propiedad, intente de nuevo más tarde.',
+        );
+        console.error(error);
+      }
     },
   });
 
@@ -335,12 +350,15 @@ export default function PredictionForm() {
               }}>
               <TextField
                 fullWidth
+                required
                 id="address"
                 name="address"
-                label="Dirección del departamento"
+                label="Dirección"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 margin="normal"
+                error={formik.touched.Lat && Boolean(formik.errors.Lat)}
+                helperText={formik.touched.Lat && formik.errors.Lat}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -360,7 +378,7 @@ export default function PredictionForm() {
               id="Size_Terrain"
               name="Size_Terrain"
               label="Tam. Terreno"
-              value={formik.values?.Size_Terrain || ''}
+              value={formik.values.Size_Terrain}
               onChange={formik.handleChange}
               error={
                 formik.touched.Size_Terrain &&
@@ -370,6 +388,7 @@ export default function PredictionForm() {
                 formik.touched.Size_Terrain && formik.errors.Size_Terrain
               }
               margin="normal"
+              inputProps={{ step: 5, min: 10, max: 1000 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">m²</InputAdornment>
@@ -386,7 +405,7 @@ export default function PredictionForm() {
               id="Size_Construction"
               name="Size_Construction"
               label="Tam. Construcción"
-              value={formik.values?.Size_Construction || ''}
+              value={formik.values.Size_Construction}
               onChange={formik.handleChange}
               error={
                 formik.touched.Size_Construction &&
@@ -397,6 +416,7 @@ export default function PredictionForm() {
                 formik.errors.Size_Construction
               }
               margin="normal"
+              inputProps={{ step: 5, min: 10, max: 1000 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">m²</InputAdornment>
@@ -413,11 +433,12 @@ export default function PredictionForm() {
               id="Rooms"
               name="Rooms"
               label="Habitaciones"
-              value={formik.values?.Rooms || ''}
+              value={formik.values.Rooms}
               onChange={formik.handleChange}
               error={formik.touched.Rooms && Boolean(formik.errors.Rooms)}
               helperText={formik.touched.Rooms && formik.errors.Rooms}
               margin="normal"
+              inputProps={{ step: 1, min: 0, max: 10 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -432,18 +453,18 @@ export default function PredictionForm() {
             <TextField
               fullWidth
               required
-              inputProps={{ step: 0.5 }}
               type="number"
               id="Bathrooms"
               name="Bathrooms"
               label="Baños"
-              value={formik.values?.Bathrooms || ''}
+              value={formik.values.Bathrooms}
               onChange={formik.handleChange}
               error={
                 formik.touched.Bathrooms && Boolean(formik.errors.Bathrooms)
               }
               helperText={formik.touched.Bathrooms && formik.errors.Bathrooms}
               margin="normal"
+              inputProps={{ step: 0.5, min: 1, max: 10 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -462,11 +483,12 @@ export default function PredictionForm() {
               id="Parking"
               name="Parking"
               label="Estacionamientos"
-              value={formik.values?.Parking || ''}
+              value={formik.values.Parking}
               onChange={formik.handleChange}
               error={formik.touched.Parking && Boolean(formik.errors.Parking)}
               helperText={formik.touched.Parking && formik.errors.Parking}
               margin="normal"
+              inputProps={{ step: 1, min: 0, max: 10 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -485,11 +507,12 @@ export default function PredictionForm() {
               id="Age"
               name="Age"
               label="Antigüedad"
-              value={formik.values?.Age || ''}
+              value={formik.values.Age}
               onChange={formik.handleChange}
               error={formik.touched.Age && Boolean(formik.errors.Age)}
               helperText={formik.touched.Age && formik.errors.Age}
               margin="normal"
+              inputProps={{ step: 1, min: 0, max: 100 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -500,60 +523,37 @@ export default function PredictionForm() {
             />
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            alignItems={'flex-end'}
-            display={'flex'}>
-            <FormControl fullWidth sx={{ mb: 1 }}>
-              <InputLabel
-                disabled={
-                  formik.values?.Municipality !== null &&
-                  formik.values?.Municipality !== ''
-                }>
-                Alcaldía
-              </InputLabel>
-              <Select
-                fullWidth
-                id="Municipality"
-                name="Municipality"
-                label="Alcaldía2"
-                value={
-                  formik.values?.Municipality === null ||
-                  formik.values?.Municipality === ''
-                    ? ''
-                    : formik.values?.Municipality
-                }
-                onChange={formik.handleChange}
-                disabled={
-                  formik.values?.Municipality !== null &&
-                  formik.values?.Municipality !== ''
-                }
-                error={
-                  formik.touched.Municipality &&
-                  Boolean(formik.errors.Municipality)
-                }>
-                <MenuItem key={''} value={''} disabled>
-                  Seleccione una alcaldía
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              select
+              fullWidth
+              required
+              label="Alcaldía"
+              id="Municipality"
+              name="Municipality"
+              value={formik.values?.Municipality || ''}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.Municipality &&
+                Boolean(formik.errors.Municipality)
+              }
+              margin="normal"
+              helperText={
+                formik.touched.Municipality && formik.errors.Municipality
+              }>
+              <MenuItem key={''} value={''} disabled>
+                Seleccione una alcaldía
+              </MenuItem>
+              {alcaldias.map((alcaldia: string) => (
+                <MenuItem key={alcaldia} value={alcaldia}>
+                  {alcaldia}
                 </MenuItem>
-                {alcaldias.map((alcaldia: string) => (
-                  <MenuItem key={alcaldia} value={alcaldia}>
-                    {alcaldia}
-                  </MenuItem>
-                ))}
-              </Select>
-              {formik.touched.Municipality && formik.errors.Municipality && (
-                <Typography variant="body2" color="red" gutterBottom>
-                  {formik.errors.Municipality}
-                </Typography>
-              )}
-            </FormControl>
+              ))}
+            </TextField>
           </Grid>
 
-          {alcaldias.includes(formik.values?.Municipality) &&
+          {formik.values.Municipality &&
+          alcaldias.includes(formik.values.Municipality) &&
           !!formik.values?.Lat &&
           !!formik.values?.Lng ? (
             <Grid item xs={12}>
@@ -598,15 +598,17 @@ export default function PredictionForm() {
 
         <Button
           color="primary"
+          size="large"
           variant="contained"
           fullWidth
           type="submit"
-          disabled={
-            !formik.dirty || !formik.isValid || formik.isSubmitting || !address
-          }
-          sx={{ mt: 3 }}>
-          {formik.isSubmitting ? 'Estimando...' : 'Estimar Precio'}
-          {formik.dirty && !formik.isValid && ' (Revisa el formulario)'}
+          disabled={formik.isSubmitting}
+          sx={{ mt: 3, fontWeight: 700 }}>
+          {formik.isSubmitting && 'Estimando Precio...'}
+          {formik.isValid && !formik.isSubmitting && 'Estimar Precio'}
+          {!formik.isValid &&
+            formik.dirty &&
+            'Por favor, completa todos los campos'}
         </Button>
       </form>
 
@@ -664,7 +666,11 @@ export default function PredictionForm() {
               <Typography variant="body2" align="center" gutterBottom>
                 <strong>Departamento en {predictionsForm.address}</strong>
               </Typography>
-              <Typography variant="body2" align="justify" gutterBottom>
+              <Typography
+                variant="body2"
+                align="justify"
+                sx={{ wordBreak: 'break-word', hyphens: 'auto' }}
+                gutterBottom>
                 Estimación realizada con los siguientes datos:{' '}
                 <strong>{predictionsForm.Age} años de antigüedad</strong>,{' '}
                 <strong>{predictionsForm.Rooms} habitaciones</strong>,{' '}
@@ -677,7 +683,10 @@ export default function PredictionForm() {
                 . La Alcaldía seleccionada es{' '}
                 <strong>{predictionsForm.Municipality}</strong>.
               </Typography>
-              <Typography variant="body2" align="justify">
+              <Typography
+                variant="body2"
+                sx={{ wordBreak: 'break-word', hyphens: 'auto' }}
+                align="justify">
                 Se obtuvieron {Object.keys(predictions).length} predicciones de
                 los siguientes algoritmos:{' '}
                 {Object.keys(predictions)
@@ -693,8 +702,12 @@ export default function PredictionForm() {
               </Typography>
               <Typography variant="caption" align="center">
                 Fecha de estimación:{' '}
-                {predictionsForm.fecha.toLocaleDateString()}-
-                {predictionsForm.fecha.toLocaleTimeString()}
+                {predictionsForm.fecha.toLocaleDateString('es-MX', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}{' '}
+                a las {predictionsForm.fecha.toLocaleTimeString()}
               </Typography>
             </Box>
           </Box>
@@ -706,7 +719,7 @@ export default function PredictionForm() {
                   <Grid key={key} item xs={12} sm={6} lg={4}>
                     <Card sx={{ textAlign: 'center' }} elevation={1}>
                       <CardContent>
-                        <CurrencyConverter price={value} />
+                        <CurrencyConverter price={Number(value)} />
                       </CardContent>
                       <Box
                         sx={{
@@ -746,20 +759,24 @@ export default function PredictionForm() {
                 }}
               />
               <Typography
-                variant="body2"
+                variant="caption"
                 color="text.secondary"
                 align="justify"
-                // set the spacing between each line according to icon size
-                sx={{}}>
+                sx={{
+                  wordBreak: 'break-word',
+                  hyphens: 'auto',
+                }}>
                 Las predicciones son aproximadas y los resultados de cada modelo
                 pueden variar. Los precios son estimados en pesos mexicanos, la
                 conversión a otras monedas se realiza usando el API de{' '}
-                <a href="https://exchangerate-api.com/">ExchangeRate-API</a>.{' '}
-                Para conocer el precio real de una propiedad, se recomienda
+                <a href="https://exchangerate-api.com/" target="_blank">
+                  ExchangeRate-API
+                </a>
+                . Para conocer el precio real de una propiedad, se recomienda
                 contactar a un profesional en bienes raíces. Si deseas conocer
                 más detalles de los modelos de predicción, puedes consultar la
                 documentación del proyecto en{' '}
-                <a href="/acerca-de">
+                <a href="/acerca-de" target="_blank">
                   la sección de <strong>Acerca De</strong>
                 </a>
                 .
