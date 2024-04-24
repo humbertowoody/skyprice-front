@@ -50,7 +50,18 @@ export default function NavBar() {
                 textDecoration: 'none',
               }}>
               SkyPrice
+              <Typography
+                variant="caption"
+                sx={{
+                  ml: 0.5,
+                  fontWeight: 800,
+                  fontSize: '0.7rem',
+                  color: 'inherit',
+                }}>
+                v1.0.0
+              </Typography>
             </Typography>
+            {/* subtítulo pequeñísimo con la versión de la app 1.0.0 */}
 
             {/* Para pantallas medianas y grandes */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>

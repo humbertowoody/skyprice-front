@@ -29,6 +29,9 @@ import BathtubIcon from '@mui/icons-material/Bathtub';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
+import Image from 'next/image';
+import departamentoIsometrico from '/public/departamento-isometrico.svg';
+import CurrencyConverter from './CurrencyConverter';
 
 // Declarar un array statico para las librerias de Google Maps
 const libraries: any[] = ['places'];
@@ -154,7 +157,7 @@ export default function PredictionForm() {
       Age: 0,
       Lat: 0,
       Lng: 0,
-      Municipality: 'Benito Juárez',
+      Municipality: '',
       fecha: new Date(),
     });
 
@@ -169,7 +172,7 @@ export default function PredictionForm() {
       Age: 0,
       Lat: 0,
       Lng: 0,
-      Municipality: 'Benito Juárez',
+      Municipality: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values: PredictionsForm) => {
@@ -621,65 +624,90 @@ export default function PredictionForm() {
               Resultados de la Estimación
             </Typography>
           </Box>
+
           <Box
             mt={2}
             sx={{
-              paddingX: { xs: 2, lg: 20 },
-              paddingY: 2,
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               backgroundColor: 'rgba(0, 0, 0, 0.05)',
-              borderRadius: 1,
+              borderRadius: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
-            <Typography variant="body2" align="center" gutterBottom>
-              Estimación realizada para la dirección{' '}
-              <i>{predictionsForm.address}</i>. Con los siguientes datos:{' '}
-              <strong>{predictionsForm.Rooms}</strong> habitaciones,{' '}
-              <strong>{predictionsForm.Bathrooms}</strong> baños,{' '}
-              <strong>{predictionsForm.Parking}</strong> estacionamientos,{' '}
-              <strong>{predictionsForm.Size_Terrain}</strong> m² de terreno y{' '}
-              <strong>{predictionsForm.Size_Construction}</strong> m² de
-              construcción. La Alcaldía seleccionada es{' '}
-              <strong>{predictionsForm.Municipality}</strong>.
-            </Typography>
-            <Typography variant="caption" align="center">
-              Fecha de estimación: {predictionsForm.fecha.toLocaleDateString()}-
-              {predictionsForm.fecha.toLocaleTimeString()}
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flex: 1,
+                height: 200,
+                width: 200,
+                margin: 'auto',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                src={departamentoIsometrico}
+                alt="Departamento Isométrico"
+                width={200}
+                height={200}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 2,
+                px: { xs: 2, sm: 5 },
+                py: { xs: 1, sm: 2 },
+                gap: 2,
+              }}>
+              <Typography variant="body2" align="center" gutterBottom>
+                <strong>Departamento en {predictionsForm.address}</strong>
+              </Typography>
+              <Typography variant="body2" align="justify" gutterBottom>
+                Estimación realizada con los siguientes datos:{' '}
+                <strong>{predictionsForm.Age} años de antigüedad</strong>,{' '}
+                <strong>{predictionsForm.Rooms} habitaciones</strong>,{' '}
+                <strong>{predictionsForm.Bathrooms} baños</strong>,{' '}
+                <strong>{predictionsForm.Parking} estacionamientos</strong>,{' '}
+                <strong>{predictionsForm.Size_Terrain} m² de terreno</strong> y{' '}
+                <strong>
+                  {predictionsForm.Size_Construction} m² de construcción
+                </strong>
+                . La Alcaldía seleccionada es{' '}
+                <strong>{predictionsForm.Municipality}</strong>.
+              </Typography>
+              <Typography variant="body2" align="justify">
+                Se obtuvieron {Object.keys(predictions).length} predicciones de
+                los siguientes algoritmos:{' '}
+                {Object.keys(predictions)
+                  .map((key) =>
+                    key === 'svm'
+                      ? 'SVM'
+                      : key === 'random_forest'
+                      ? 'Random Forest'
+                      : 'Redes Neuronales',
+                  )
+                  .join(', ')}
+                .
+              </Typography>
+              <Typography variant="caption" align="center">
+                Fecha de estimación:{' '}
+                {predictionsForm.fecha.toLocaleDateString()}-
+                {predictionsForm.fecha.toLocaleTimeString()}
+              </Typography>
+            </Box>
           </Box>
+
           <Box mt={4}>
             <Grid container spacing={3} justifyContent="center">
               {Object.entries(predictions).map(
                 ([key, value]): ReactElement => (
-                  <Grid key={key} item xs={12} sm={4}>
-                    <Card sx={{ textAlign: 'center' }} elevation={4}>
+                  <Grid key={key} item xs={12} sm={6} lg={4}>
+                    <Card sx={{ textAlign: 'center' }} elevation={1}>
                       <CardContent>
-                        <Typography variant="body1">
-                          Venta:{' '}
-                          {
-                            // @ts-ignore
-                            value.toLocaleString('es-MX', {
-                              style: 'currency',
-                              currency: 'MXN',
-                            })
-                          }{' '}
-                          MXN
-                        </Typography>
-                        <Typography variant="body2">
-                          Renta:{' '}
-                          {
-                            // @ts-ignore
-                            ((value * 0.06) / 12).toLocaleString('es-MX', {
-                              style: 'currency',
-                              currency: 'MXN',
-                            })
-                          }{' '}
-                          MXN
-                        </Typography>
-
-                        <Typography variant="body2" color="text.secondary">
-                          (Precios estimados)
-                        </Typography>
+                        <CurrencyConverter price={value} />
                       </CardContent>
-                      {/* Footer de la tarjeta */}
                       <Box
                         sx={{
                           display: 'flex',
@@ -703,22 +731,30 @@ export default function PredictionForm() {
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
                 mt: 4,
                 p: 2,
                 borderRadius: 1,
                 border: 1,
               }}>
               {/* ícono de información */}
-              <InfoIcon color="primary" sx={{ flex: 1 }} />
 
+              <InfoIcon
+                color="primary"
+                sx={{
+                  fontSize: 30,
+                  mr: 2,
+                }}
+              />
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ flex: 8 }}>
+                align="justify"
+                // set the spacing between each line according to icon size
+                sx={{}}>
                 Las predicciones son aproximadas y los resultados de cada modelo
-                pueden variar. Los precios son estimados en pesos mexicanos.
+                pueden variar. Los precios son estimados en pesos mexicanos, la
+                conversión a otras monedas se realiza usando el API de{' '}
+                <a href="https://exchangerate-api.com/">ExchangeRate-API</a>.{' '}
                 Para conocer el precio real de una propiedad, se recomienda
                 contactar a un profesional en bienes raíces. Si deseas conocer
                 más detalles de los modelos de predicción, puedes consultar la
