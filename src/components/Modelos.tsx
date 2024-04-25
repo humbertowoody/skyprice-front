@@ -114,7 +114,7 @@ export const Modelos: React.FC<{ estadisticas: Estadisticas }> = ({
               </Box>
               <Typography variant="body2" textAlign="justify">
                 {t('about.models.rf', {
-                  rms: estadisticas.models.random_forest.rmse.toFixed(2),
+                  rmse: estadisticas.models.random_forest.rmse.toFixed(2),
                   r2: (estadisticas.models.random_forest.r2 * 100).toFixed(2),
                   n_estimators: estadisticas.models.random_forest.n_estimators,
                   max_depth: estadisticas.models.random_forest.max_depth,

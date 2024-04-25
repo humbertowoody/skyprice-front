@@ -41,15 +41,6 @@ export default function LanguageSelector() {
       }}
       value={valueLang}
       onChange={(e) => setLang(e.target.value)}>
-      <MenuItem value="en" sx={{ color: 'black', fontWeight: 'normal' }}>
-        <img
-          src="https://flagcdn.com/gb.svg"
-          width="20"
-          alt="English"
-          style={{ marginRight: 8 }}
-        />
-        {isSmallScreen ? '' : 'English'}
-      </MenuItem>
       <MenuItem value="es" sx={{ color: 'black', fontWeight: 'normal' }}>
         <img
           src="https://flagcdn.com/es.svg"
@@ -58,6 +49,15 @@ export default function LanguageSelector() {
           style={{ marginRight: 8 }}
         />
         {isSmallScreen ? '' : 'Español'}
+      </MenuItem>
+      <MenuItem value="en" sx={{ color: 'black', fontWeight: 'normal' }}>
+        <img
+          src="https://flagcdn.com/gb.svg"
+          width="20"
+          alt="English"
+          style={{ marginRight: 8 }}
+        />
+        {isSmallScreen ? '' : 'English'}
       </MenuItem>
       <MenuItem value="fr" sx={{ color: 'black', fontWeight: 'normal' }}>
         <img
