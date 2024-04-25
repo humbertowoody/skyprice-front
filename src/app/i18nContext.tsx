@@ -21,12 +21,14 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
         })
         .then((module) => {
           defTranslations = module.default;
-          console.info(`Traducciones cargadas para el idioma ${defLang}`);
+          console.info(
+            `Traducciones iniciales cargadas para el idioma ${defLang}`,
+          );
         });
     }
   }
 
-  const [lang, setLang] = useState(defLang);
+  const [lang, setLang] = useState<string>(defLang);
   const [translations, setTranslations] = useState({ ...defTranslations });
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [lang]);
 
   return (
-    <I18nContext.Provider value={{ translations, setLang: setLang }}>
+    <I18nContext.Provider value={{ translations, setLang: setLang as any }}>
       {children}
     </I18nContext.Provider>
   );
