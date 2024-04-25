@@ -354,7 +354,7 @@ export default function PredictionForm() {
                 required
                 id="address"
                 name="address"
-                label="Dirección"
+                label={t('predictionForm.addressLabel')}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 margin="normal"
@@ -378,7 +378,7 @@ export default function PredictionForm() {
               type="number"
               id="Size_Terrain"
               name="Size_Terrain"
-              label="Tam. Terreno"
+              label={t('predictionForm.sizeTerrainLabel')}
               value={formik.values.Size_Terrain}
               onChange={formik.handleChange}
               error={
@@ -405,7 +405,7 @@ export default function PredictionForm() {
               type="number"
               id="Size_Construction"
               name="Size_Construction"
-              label="Tam. Construcción"
+              label={t('predictionForm.sizeConstructionLabel')}
               value={formik.values.Size_Construction}
               onChange={formik.handleChange}
               error={
@@ -433,7 +433,7 @@ export default function PredictionForm() {
               type="number"
               id="Rooms"
               name="Rooms"
-              label="Habitaciones"
+              label={t('predictionForm.roomsLabel')}
               value={formik.values.Rooms}
               onChange={formik.handleChange}
               error={formik.touched.Rooms && Boolean(formik.errors.Rooms)}
@@ -457,7 +457,7 @@ export default function PredictionForm() {
               type="number"
               id="Bathrooms"
               name="Bathrooms"
-              label="Baños"
+              label={t('predictionForm.bathroomsLabel')}
               value={formik.values.Bathrooms}
               onChange={formik.handleChange}
               error={
@@ -483,7 +483,7 @@ export default function PredictionForm() {
               type="number"
               id="Parking"
               name="Parking"
-              label="Estacionamientos"
+              label={t('predictionForm.parkingLabel')}
               value={formik.values.Parking}
               onChange={formik.handleChange}
               error={formik.touched.Parking && Boolean(formik.errors.Parking)}
@@ -507,7 +507,7 @@ export default function PredictionForm() {
               type="number"
               id="Age"
               name="Age"
-              label="Antigüedad"
+              label={t('predictionForm.ageLabel')}
               value={formik.values.Age}
               onChange={formik.handleChange}
               error={formik.touched.Age && Boolean(formik.errors.Age)}
@@ -529,7 +529,7 @@ export default function PredictionForm() {
               select
               fullWidth
               required
-              label="Alcaldía"
+              label={t('predictionForm.municipalityLabel')}
               id="Municipality"
               name="Municipality"
               value={formik.values?.Municipality || ''}
@@ -543,7 +543,7 @@ export default function PredictionForm() {
                 formik.touched.Municipality && formik.errors.Municipality
               }>
               <MenuItem key={''} value={''} disabled>
-                Seleccione una alcaldía
+                {t('predictionForm.municipalityPlaceholder')}
               </MenuItem>
               {alcaldias.map((alcaldia: string) => (
                 <MenuItem key={alcaldia} value={alcaldia}>
@@ -589,9 +589,7 @@ export default function PredictionForm() {
           ) : (
             <Grid item xs={12}>
               <Typography variant="body2" align="center">
-                Por favor escribe una dirección válida dentro de la CDMX para
-                visualizar el mapa de la ubicación de la propiedad y estimar el
-                precio.
+                {t('predictionForm.mapInfo')}
               </Typography>
             </Grid>
           )}
@@ -605,11 +603,9 @@ export default function PredictionForm() {
           type="submit"
           disabled={formik.isSubmitting}
           sx={{ mt: 3, fontWeight: 700 }}>
-          {formik.isSubmitting && 'Estimando Precio...'}
-          {formik.isValid && !formik.isSubmitting && 'Estimar Precio'}
-          {!formik.isValid &&
-            formik.dirty &&
-            'Por favor, completa todos los campos'}
+          {formik.isSubmitting && t('predictionForm.submitting')}
+          {formik.isValid && !formik.isSubmitting && t('predictionForm.submit')}
+          {!formik.isValid && formik.dirty && t('predictionForm.submitInvalid')}
         </Button>
       </form>
 
@@ -624,7 +620,7 @@ export default function PredictionForm() {
             gap={2}
             mt={4}>
             <Typography variant="h5" align="center" gutterBottom>
-              Resultados de la Estimación
+              {t('predictionForm.predictions.title')}
             </Typography>
           </Box>
 
@@ -665,50 +661,49 @@ export default function PredictionForm() {
                 gap: 2,
               }}>
               <Typography variant="body2" align="center" gutterBottom>
-                <strong>Departamento en {predictionsForm.address}</strong>
+                <strong>
+                  {t('predictionForm.predictions.subtitle', {
+                    address: predictionsForm.address,
+                  })}
+                </strong>
               </Typography>
               <Typography
                 variant="body2"
                 align="justify"
                 sx={{ wordBreak: 'break-word', hyphens: 'auto' }}
-                gutterBottom>
-                Estimación realizada con los siguientes datos:{' '}
-                <strong>{predictionsForm.Age} años de antigüedad</strong>,{' '}
-                <strong>{predictionsForm.Rooms} habitaciones</strong>,{' '}
-                <strong>{predictionsForm.Bathrooms} baños</strong>,{' '}
-                <strong>{predictionsForm.Parking} estacionamientos</strong>,{' '}
-                <strong>{predictionsForm.Size_Terrain} m² de terreno</strong> y{' '}
-                <strong>
-                  {predictionsForm.Size_Construction} m² de construcción
-                </strong>
-                . La Alcaldía seleccionada es{' '}
-                <strong>{predictionsForm.Municipality}</strong>.
-              </Typography>
+                gutterBottom
+                dangerouslySetInnerHTML={{
+                  __html: t('predictionForm.predictions.details', {
+                    sizeTerrain: predictionsForm.Size_Terrain,
+                    sizeConstruction: predictionsForm.Size_Construction,
+                    rooms: predictionsForm.Rooms,
+                    bathrooms: predictionsForm.Bathrooms,
+                    parking: predictionsForm.Parking,
+                    age: predictionsForm.Age,
+                    municipality: predictionsForm.Municipality,
+                  }),
+                }}
+              />
               <Typography
                 variant="body2"
                 sx={{ wordBreak: 'break-word', hyphens: 'auto' }}
                 align="justify">
-                Se obtuvieron {Object.keys(predictions).length} predicciones de
-                los siguientes algoritmos:{' '}
-                {Object.keys(predictions)
-                  .map((key) =>
-                    key === 'svm'
-                      ? 'SVM'
-                      : key === 'random_forest'
-                      ? 'Random Forest'
-                      : 'Redes Neuronales',
-                  )
-                  .join(', ')}
-                .
+                {t('predictionForm.predictions.algorithmsSummary', {
+                  algorithmsCount: Object.keys(predictions).length,
+                  svm: t('common.svm'),
+                  rf: t('common.randomForest'),
+                  nn: t('common.neuralNetwork'),
+                })}
               </Typography>
               <Typography variant="caption" align="center">
-                Fecha de estimación:{' '}
-                {predictionsForm.fecha.toLocaleDateString('es-MX', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}{' '}
-                a las {predictionsForm.fecha.toLocaleTimeString()}
+                {t('predictionForm.predictions.generatedAt', {
+                  date: predictionsForm.fecha.toLocaleDateString('es-MX', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }),
+                  time: predictionsForm.fecha.toLocaleTimeString(),
+                })}
               </Typography>
             </Box>
           </Box>
@@ -730,9 +725,14 @@ export default function PredictionForm() {
                           p: 2,
                         }}>
                         <Typography variant="body2" color="text.secondary">
-                          Algoritmo: {key === 'svm' && 'SVM'}
-                          {key === 'random_forest' && 'Random Forest'}
-                          {key === 'neural_network' && 'Redes Neuronales'}
+                          {t('predictionForm.predictions.results.title', {
+                            algorithm:
+                              key === 'svm'
+                                ? t('common.svm')
+                                : key === 'random_forest'
+                                ? t('common.randomForest')
+                                : t('common.neuralNetwork'),
+                          })}
                         </Typography>
                       </Box>
                     </Card>
@@ -766,22 +766,11 @@ export default function PredictionForm() {
                 sx={{
                   wordBreak: 'break-word',
                   hyphens: 'auto',
-                }}>
-                Las predicciones son aproximadas y los resultados de cada modelo
-                pueden variar. Los precios son estimados en pesos mexicanos, la
-                conversión a otras monedas se realiza usando el API de{' '}
-                <a href="https://exchangerate-api.com/" target="_blank">
-                  ExchangeRate-API
-                </a>
-                . Para conocer el precio real de una propiedad, se recomienda
-                contactar a un profesional en bienes raíces. Si deseas conocer
-                más detalles de los modelos de predicción, puedes consultar la
-                documentación del proyecto en{' '}
-                <a href="/acerca-de" target="_blank">
-                  la sección de <strong>Acerca De</strong>
-                </a>
-                .
-              </Typography>
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: t('predictionForm.disclaimer'),
+                }}
+              />
             </Box>
           </Box>
         </Fragment>

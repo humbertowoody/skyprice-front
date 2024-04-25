@@ -22,8 +22,12 @@ import redoclogo from '/public/redoc-logo.png';
 import reformasm from '/public/reforma-sm.jpg';
 import Link from 'next/link';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import { useTranslation } from '../i18nContext';
 
 export default function PaginaEstadisticas() {
+  // Traducción de la página
+  const { t } = useTranslation();
+
   // URL de la API
   const URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -118,8 +122,7 @@ export default function PaginaEstadisticas() {
             textAlign: 'center',
             fontWeight: '600',
           }}>
-          <strong>SkyPrice</strong>, la plataforma de estimación de precios de
-          departamentos en la Ciudad de México
+          <strong>SkyPrice</strong>, {t('about.title')}
         </Typography>
         <Box
           sx={{
@@ -134,20 +137,18 @@ export default function PaginaEstadisticas() {
             }}>
             <Card elevation={10}>
               <CardMedia
-                title="Skyline de la Ciudad de México"
+                title={t('about.caption')}
                 image={reformasm.src}
                 component="img"
               />
               <CardContent sx={{ textAlign: 'center' }}>
-                <Typography variant="body2">
-                  Paseo de la Reforma, Ciudad de México
-                </Typography>
+                <Typography variant="body2">{t('about.caption')}</Typography>
                 <Typography variant="caption" textAlign="center">
-                  Foto de{' '}
+                  {t('about.captionBy')}{' '}
                   <a href="https://unsplash.com/es/@carlosaranda?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
                     carlos aranda
                   </a>{' '}
-                  en{' '}
+                  {t('about.captionBy2')}{' '}
                   <a href="https://unsplash.com/es/fotos/edificios-de-gran-altura-durante-el-dia-pH6iuFEqUu8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
                     Unsplash
                   </a>
@@ -167,28 +168,20 @@ export default function PaginaEstadisticas() {
               justifyContent: 'space-between',
             }}>
             <Typography variant="h5" component="h2" sx={{ mb: 2, flex: 1 }}>
-              ¿Qué es <strong>SkyPrice</strong>?
+              {t('about.question')} <strong>SkyPrice</strong>?
             </Typography>
-            <Typography variant="body1" textAlign="justify" sx={{ flex: 1 }}>
-              <strong>SkyPrice</strong> es una plataforma diseñada para analizar
-              y estimar los precios de propiedades en la Ciudad de México,
-              basándose en un detallado conjunto de datos locales. Utilizando
-              técnicas de aprendizaje automático como{' '}
-              <strong>Random Forest</strong>,{' '}
-              <strong>Máquina de Vectores de Soporte (SVM)</strong> y{' '}
-              <strong>Redes Neuronales</strong>, ofrece estimaciones precisas
-              del valor de mercado de departamentos según sus características
-              específicas. Adicionalmente, cuenta con una{' '}
-              <strong>API pública</strong> que facilita la integración de sus
-              funcionalidades en otras aplicaciones, ampliando así su
-              aplicabilidad y alcance.
-            </Typography>
+            <Typography
+              variant="body1"
+              textAlign="justify"
+              sx={{ flex: 1 }}
+              dangerouslySetInnerHTML={{ __html: t('about.description') }}
+            />
             <Link href="/" passHref>
               <Button
                 variant="contained"
                 endIcon={<SellIcon />}
                 sx={{ flex: 1, textTransform: 'none', fontWeight: 600, mt: 2 }}>
-                ¡Estima el precio de tu departamento!
+                {t('about.button')}
               </Button>
             </Link>
           </Box>
@@ -214,7 +207,7 @@ export default function PaginaEstadisticas() {
           <Box sx={{ display: 'flex', gap: 2 }}>
             <AutoGraphIcon sx={{ fontSize: 30, color: 'primary.main' }} />
             <Typography variant="h5" component="div">
-              Gráficas de los modelos
+              {t('about.models.chartsTitle')}
             </Typography>
           </Box>
           <Box sx={{ maxWidth: 'lg' }}>
@@ -231,7 +224,7 @@ export default function PaginaEstadisticas() {
               endIcon={<OpenInNewIcon />}
               startIcon={<ZoomInIcon />}
               sx={{ mt: 2, textTransform: 'none' }}>
-              Ver gráficas en otra pestaña
+              {t('about.models.chartsBtn')}
             </Button>
           </Link>
         </Box>
@@ -251,14 +244,11 @@ export default function PaginaEstadisticas() {
           <Typography
             variant="h5"
             component="h2"
-            sx={{ mt: 2, mb: 3, textAlign: 'center' }}>
-            API Pública de <strong>SkyPrice</strong>
-          </Typography>
+            sx={{ mt: 2, mb: 3, textAlign: 'center' }}
+            dangerouslySetInnerHTML={{ __html: t('about.api.title') }}
+          />
           <Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
-            ¿Te gustaría utilizar nuestra API para obtener estimaciones de
-            precios de departamentos en la Ciudad de México? Visita nuestra
-            documentación para conocer los endpoints disponibles y cómo
-            utilizarlos.
+            {t('about.api.description')}
           </Typography>
 
           {/* Mostrar el base endpoint en un tipo de texto para código */}
@@ -317,12 +307,11 @@ export default function PaginaEstadisticas() {
                   component="div"
                   textAlign="justify"
                   sx={{ mt: 1, mb: 1 }}>
-                  Swagger UI es una herramienta que permite visualizar y probar
-                  los endpoints de una API de manera interactiva.
+                  {t('about.api.swagger')}
                 </Typography>
                 <Link href={`${URL}/openapi`} target="_blank" rel="noopener">
                   <Button startIcon={<OpenInNewIcon />}>
-                    Visitar Swagger UI
+                    {t('about.api.visitSwagger')}
                   </Button>
                 </Link>
               </Paper>
@@ -345,14 +334,11 @@ export default function PaginaEstadisticas() {
                   component="div"
                   textAlign="justify"
                   sx={{ mt: 1, mb: 1 }}>
-                  ReDoc es una herramienta de documentación de APIs para
-                  visualizar la documentación de una API.
+                  {t('about.api.redoc')}
                 </Typography>
                 <Link href={`${URL}/redoc`} target="_blank" rel="noopener">
-                  <Button
-                    //variant="outlined"
-                    startIcon={<OpenInNewIcon />}>
-                    Visitar ReDoc
+                  <Button startIcon={<OpenInNewIcon />}>
+                    {t('about.api.visitRedoc')}
                   </Button>
                 </Link>
               </Paper>

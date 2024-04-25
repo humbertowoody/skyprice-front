@@ -6,13 +6,13 @@ import {
   Box,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   ListItemAvatar,
   Avatar,
 } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { useTranslation } from '../app/i18nContext';
 
 const currencies = [
   {
@@ -89,6 +89,8 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
   const [currency, setCurrency] = useState<string>('MXN');
   const [convertedPrice, setConvertedPrice] = useState<Number>(price);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (currency === 'MXN') {
       setConvertedPrice(price);
@@ -112,10 +114,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
         setConvertedPrice(jsonData.conversion_result);
       } catch (error) {
         console.error('Error fetching currency data:', error);
-        alert(
-          'Ocurrió un error al convertir la moneda, intenta de nuevo más tarde.',
-        );
-        setConvertedPrice(price);
+        alert(t('predictionForm.currencyConverter.requestError'));
       }
     };
 
@@ -147,7 +146,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
   return (
     <div>
       <Typography variant="h6" align="center">
-        Venta:{' '}
+        {t('predictionForm.currencyConverter.sellingPrice')}:{' '}
         {convertedPrice.toLocaleString(undefined, {
           style: 'currency',
           currency,
@@ -157,7 +156,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
       </Typography>
       <Box display="flex" alignItems="center" justifyContent="space-around">
         <Typography variant="body2" align="center">
-          Renta:{' '}
+          {t('predictionForm.currencyConverter.rentalPrice')}:{' '}
         </Typography>
         <Box display="flex" flexDirection="column">
           <List dense>
@@ -173,11 +172,13 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
                     {convertedRent6}
                     <Typography variant="caption" component="span">
                       {' '}
-                      / mes
+                      / {t('predictionForm.currencyConverter.month')}
                     </Typography>
                   </Fragment>
                 }
-                secondary="6% anual"
+                secondary={t('predictionForm.currencyConverter.annual', {
+                  percentage: 6,
+                })}
               />
             </ListItem>
             <ListItem disablePadding>
@@ -192,11 +193,13 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
                     {convertedRent4}
                     <Typography variant="caption" component="span">
                       {' '}
-                      / mes
+                      / {t('predictionForm.currencyConverter.month')}
                     </Typography>
                   </Fragment>
                 }
-                secondary="4% anual"
+                secondary={t('predictionForm.currencyConverter.annual', {
+                  percentage: 4,
+                })}
               />
             </ListItem>
           </List>
@@ -204,7 +207,7 @@ const CurrencyConverter = ({ price }: { price: Number }) => {
       </Box>
       <TextField
         select
-        label="Convertir a"
+        label={t('predictionForm.currencyConverter.selectCurrency')}
         value={currency}
         onChange={handleChange}
         fullWidth

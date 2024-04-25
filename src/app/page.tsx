@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import Footer from '@/components/Footer';
@@ -5,8 +6,10 @@ import NavBar from '@/components/NavBar';
 import FormularioPrediccion from '@/components/FormularioPrediccion';
 import skyline2 from '/public/skyline-cdmx-2.jpeg';
 import Link from 'next/link';
+import { useTranslation } from './i18nContext';
 
 export default function Estimacion() {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -37,7 +40,7 @@ export default function Estimacion() {
           color: 'white',
           p: 1,
         }}>
-        Foto de{' '}
+        {t('predictionForm.caption1')}{' '}
         <Link
           href="https://unsplash.com/es/@alexistostado?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           rel="noopener noreferrer"
@@ -46,7 +49,7 @@ export default function Estimacion() {
           passHref>
           Alexis Tostado
         </Link>{' '}
-        en{' '}
+        {t('predictionForm.caption2')}{' '}
         <Link
           href="https://unsplash.com/es/fotos/foto-aerea-de-edificios-de-hormigon-bajo-nubes-blancas-durante-el-dia-3TBuSLluZ8w?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           rel="noopener noreferrer"

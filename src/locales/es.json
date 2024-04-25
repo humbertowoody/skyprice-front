@@ -1,9 +1,106 @@
 {
+  "common": {
+    "svm": "SVM",
+    "randomForest": "Random Forest",
+    "neuralNetwork": "Redes Neuronales"
+  },
   "navbar": {
     "prediction": "Estimación de precio",
     "about": "Acerca de"
   },
   "predictionForm": {
-    "title": "estima el precio de tu departamento en la Ciudad de México"
+    "title": "estima el precio de tu departamento en la Ciudad de México",
+    "addressLabel": "Dirección",
+    "sizeTerrainLabel": "Tam. terreno",
+    "sizeConstructionLabel": "Tam. construcción",
+    "roomsLabel": "Habitaciones",
+    "bathroomsLabel": "Baños",
+    "parkingLabel": "Estacionamientos",
+    "ageLabel": "Antigüedad",
+    "municipalityLabel": "Alcaldía",
+    "municipalityPlaceholder": "Selecciona una alcaldía",
+    "submitting": "Estimando precio...",
+    "submit": "Estimar precio",
+    "submitInvalid": "Por favor llena todos los campos",
+    "mapInfo": "Por favor escribe una dirección válida dentro de la CDMX para visualizar el mapa de la ubicación de la propiedad y estimar el precio.",
+    "predictions": {
+      "title": "Resultados de la Estimación",
+      "subtitle": "Departamento en {address}",
+      "details": "Estimación realizada con los siguientes datos: <strong>{age} años de antigüedad</strong>, <strong>{rooms} habitaciones</strong>, <strong>{bathrooms} baños</strong>, <strong>{parking} estacionamientos</strong>, <strong>{sizeTerrain} m² de terreno</strong> y <strong>{sizeConstruction} m² de construcción</strong>. La Alcaldía seleccionada es <strong>{municipality}</strong>.",
+      "algorithmsSummary": "Se obtuvieron {algorithmsCount} estimaciones de precio de los siguientes algoritmos: {svm}, {rf} y {nn}.",
+      "generatedAt": "Fecha de estimación: {date} a las {time}.",
+      "results": {
+        "title": "Algoritmo: {algorithm}"
+      }
+    },
+    "currencyConverter": {
+      "requestError": "Ocurrió un error al convertir la moneda, intenta de nuevo más tarde",
+      "sellingPrice": "Venta",
+      "rentalPrice": "Renta",
+      "month": "mes",
+      "annual": "{percentage}% anual",
+      "selectCurrency": "Convertir a"
+    },
+    "disclaimer": "Las predicciones son aproximadas y los resultados de cada modelo pueden variar. Los precios son estimados en pesos mexicanos, la conversión a otras monedas se realiza usando el API de <a href=\"https://exchangerate-api.com/\" target=\"_blank\">ExchangeRate-API</a>. Para conocer el precio real de una propiedad, se recomienda contactar a un profesional en bienes raíces. Si deseas conocer más detalles de los modelos de predicción, puedes consultar la documentación del proyecto en <a href=\"/acerca-de\" target=\"_blank\">la sección de <strong>Acerca De</strong></a>.",
+    "caption1": "Foto de",
+    "caption2": "en"
+  },
+  "about": {
+    "title": "la plataforma de estimación de precios de departamentos en la Ciudad de México",
+    "caption": "Paseo de la Reforma, Ciudad de México",
+    "captionBy": "Foto de",
+    "captionBy2": "en",
+    "question": "¿Qué es",
+    "description": "<strong>SkyPrice</strong> es una plataforma diseñada para analizar y estimar los precios de propiedades en la Ciudad de México, basándose en un detallado conjunto de datos locales. Utilizando técnicas de aprendizaje automático como <strong>Random Forest</strong>, <strong>Máquina de Vectores de Soporte (SVM)</strong> y <strong>Redes Neuronales</strong>, ofrece estimaciones precisas del valor de mercado de departamentos según sus características específicas. Adicionalmente, cuenta con una <strong>API pública</strong> que facilita la integración de sus funcionalidades en otras aplicaciones, ampliando así su aplicabilidad y alcance.",
+    "button": "¡Estima el precio de tu departamento ahora!",
+    "data": {
+      "title": "Datos",
+      "description1": "Para el entrenamiento de los modelos se utilizaron conjuntos de datos obtenidos de plataformas de venta de propiedades en la Ciudad de México. Los datos fueron preprocesados y limpiados para obtener un conjunto de datos homogéneo y sin valores nulos.",
+      "description2": "Los datos se dividieron en dos conjuntos: uno de entrenamiento y otro de prueba. El conjunto de entrenamiento se utilizó para entrenar los modelos, mientras que el conjunto de prueba se utilizó para evaluar el desempeño de los modelos.",
+      "caption": "Vista aérea de la Ciudad de México",
+      "captionBy": "Foto de",
+      "captionBy2": "en",
+      "cleanData": {
+        "title": "Datos \"limpios\"",
+        "amount": "{amount} registros",
+        "description": "Esto equivale al {percentage}% ddel total de datos disponibles ({amount} registros)."
+      },
+      "trainingData": {
+        "title": "Datos de entrenamiento",
+        "amount": "{amount} registros",
+        "description": "Esto equivale al {percentage}% de los datos (entrenamiento y prueba)."
+      },
+      "testData": {
+        "title": "Datos de prueba",
+        "amount": "{amount} registros",
+        "description": "Esto equivale al {percentage}% de los datos (entrenamiento y prueba)."
+      }
+    },
+    "models": {
+      "title": "Modelos",
+      "description": "Ahora hablaremos de los algoritmos de aprendizaje automático que utiliza <strong>SkyPrice</strong>. Aquí, se presentan estadísticas de cada modelo utilizado para la estimación de precios de departamentos en la Ciudad de México. Los modelos, que incluyen <strong>Random Forest</strong>, <strong>SVM</strong> y <strong>Redes Neuronales</strong>, han sido meticulosamente configurados y entrenados con una variedad de hiperparámetros para optimizar su rendimiento en la predicción de precios.",
+      "description2": "Esta sección desglosa los resultados obtenidos, incluyendo el <i>Error Absoluto Medio (MAE)</i>, el <i>coeficiente de determinación (r²)</i> coeficiente de determinación y el <i>Error Cuadrático Medio (MSAE)</i>, junto con gráficas de ajuste que comparan las predicciones con los datos de entrenamiento, proporcionando una visión clara de la eficacia y la precisión de cada modelo.",
+      "caption": "Parque <i>La Mexicana</i>, Santa Fe, Ciudad de México",
+      "captionBy": "Foto de",
+      "captionBy2": "en",
+      "learnMore": "Aprender más...",
+      "rf": "Random Forest es un modelo compuesto por múltiples árboles de decisión y es efectivo para prevenir el sobreajuste. Con un RMSE de {rmse} y un coeficiente R2 del {r2}%, este modelo destaca por su precisión predictiva. Se configuró con {n_estimators} árboles y una profundidad máxima de {max_depth}. La puntuación OOB indica su desempeño sin validación cruzada adicional.",
+      "svm": "El SVM utiliza un kernel {kernel} para manejar relaciones no lineales. Con un valor de R2 de {r2}%, el modelo se ha configurado con un parámetro C de {C} y un epsilon de {epsilon}, ajustando el margen de error y la frontera de decisión.",
+      "nn": "La Red Neuronal utiliza un ritmo de aprendizaje de {learning_rate} y parámetros beta1 y beta2 ajustados a {beta_1} y {beta_2}. El RMSE alcanzado es de {rmse}, evidenciando su capacidad predictiva en la estimación de precios.",
+      "chartsTitle": "Gráficas de ajuste",
+      "chartsBtn": "Ver gráficas en otra pestaña"
+    },
+    "api": {
+      "title": "API Pública de <strong>SkyPrice</strong>",
+      "description": "¿Te gustaría utilizar nuestra API para obtener estimaciones de precios de departamentos en la Ciudad de México? Visita nuestra documentación para conocer los endpoints disponibles y cómo utilizarlos.",
+      "swagger": "Swagger UI es una herramienta que permite visualizar y probar los endpoints de una API de manera interactiva.",
+      "visitSwagger": "Visitar Swagger UI",
+      "redoc": "ReDoc es una herramienta de documentación de APIs para visualizar la documentación de una API.",
+      "visitRedoc": "Visitar ReDoc"
+    },
+    "credits": {
+      "title": "Créditos",
+      "description": "Este proyecto fue desarrollado por <strong>Humberto Alejandro Ortega Alcocer</strong> como parte de su <strong>Trabajo Terminal 2024-A053</strong> con el título de <i>\"Plataforma de estimación de precios de mercado de departamentos en la Ciudad de México\"</i> asesorado por el <strong> Mtro. en C. Ariel López Rojas</strong> en la <strong>Escuela Superior de Cómputo del Instituto Politécnico Nacional</strong> en la Ciudad de México para obtener el título de <strong>Ingeniero en Sistemas Computacionales</strong>."
+    }
   }
 }

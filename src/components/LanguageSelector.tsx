@@ -6,6 +6,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 export default function LanguageSelector() {
   const { setLang } = useContext(I18nContext);
   const isSmallScreen = useMediaQuery('(max-width:390px)');
+  var valueLang = 'es';
+  if (typeof window !== 'undefined') {
+    valueLang = localStorage.getItem('i18nextLng') || 'es';
+  }
 
   return (
     <TextField
@@ -35,7 +39,7 @@ export default function LanguageSelector() {
           },
         },
       }}
-      value={localStorage.getItem('i18nextLng') || 'es'}
+      value={valueLang}
       onChange={(e) => setLang(e.target.value)}>
       <MenuItem value="en" sx={{ color: 'black', fontWeight: 'normal' }}>
         <img

@@ -7,7 +7,12 @@ export const I18nContext = createContext({
 });
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState(localStorage.getItem('i18nextLng') || 'es');
+  var defLang: string = 'es';
+  if (typeof window !== 'undefined') {
+    defLang = localStorage.getItem('i18nextLng') || 'es';
+  }
+
+  const [lang, setLang] = useState(defLang);
   const [translations, setTranslations] = useState({});
 
   useEffect(() => {
@@ -34,15 +39,21 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 export function useTranslation() {
   const { translations } = useContext(I18nContext);
 
-  const t = (key) => {
-    return (
+  const t = (key, replacements = {}) => {
+    let text =
       key
         .split('.')
         .reduce(
           (obj, k) => (obj && obj[k] !== undefined ? obj[k] : null),
           translations,
-        ) || key
-    );
+        ) || key;
+    Object.keys(replacements).forEach((placeholder) => {
+      text = text.replace(
+        new RegExp(`{${placeholder}}`, 'g'),
+        replacements[placeholder],
+      );
+    });
+    return text;
   };
 
   return { t };
