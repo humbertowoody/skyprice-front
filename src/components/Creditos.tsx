@@ -60,22 +60,13 @@ export const Creditos: React.FC = () => {
           gap: 2,
           mt: 4,
         }}>
-        <Typography variant="body1" sx={{ textAlign: 'justify' }}>
-          Este proyecto fue desarrollado por{' '}
-          <strong>Humberto Alejandro Ortega Alcocer</strong> como parte de su{' '}
-          <strong>Trabajo Terminal 2024-A053</strong> con el título de{' '}
-          <i>
-            "Plataforma de estimación de precios de mercado de departamentos en
-            la Ciudad de México"
-          </i>{' '}
-          asesorado por el <strong> Mtro. Ariel López Rojas</strong> en la{' '}
-          <strong>
-            Escuela Superior de Cómputo del Instituto Politécnico Nacional
-          </strong>{' '}
-          en la Ciudad de México para obtener el título de{' '}
-          <strong>Ingeniero en Sistemas Computacionales</strong>.
-        </Typography>
-
+        <Typography
+          variant="body1"
+          sx={{ textAlign: 'justify' }}
+          dangerouslySetInnerHTML={{
+            __html: t('about.credits.description'),
+          }}
+        />
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           <Image
             src={logoIPN}

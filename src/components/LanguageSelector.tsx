@@ -46,7 +46,7 @@ export default function LanguageSelector() {
           src="https://flagcdn.com/es.svg"
           width="20"
           alt="Español"
-          style={{ marginRight: 8 }}
+          style={{ marginRight: isSmallScreen ? 0 : 8 }}
         />
         {isSmallScreen ? '' : 'Español'}
       </MenuItem>
@@ -55,7 +55,7 @@ export default function LanguageSelector() {
           src="https://flagcdn.com/gb.svg"
           width="20"
           alt="English"
-          style={{ marginRight: 8 }}
+          style={{ marginRight: isSmallScreen ? 0 : 8 }}
         />
         {isSmallScreen ? '' : 'English'}
       </MenuItem>
@@ -64,7 +64,7 @@ export default function LanguageSelector() {
           src="https://flagcdn.com/fr.svg"
           width="20"
           alt="Français"
-          style={{ marginRight: 8 }}
+          style={{ marginRight: isSmallScreen ? 0 : 8 }}
         />
         {isSmallScreen ? '' : 'Français'}
       </MenuItem>
@@ -73,7 +73,7 @@ export default function LanguageSelector() {
           src="https://flagcdn.com/pt.svg"
           width="20"
           alt="Português"
-          style={{ marginRight: 8 }}
+          style={{ marginRight: isSmallScreen ? 0 : 8 }}
         />
         {isSmallScreen ? '' : 'Português'}
       </MenuItem>
