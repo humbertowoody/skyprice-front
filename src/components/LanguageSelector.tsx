@@ -4,7 +4,7 @@ import { MenuItem, TextField } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function LanguageSelector() {
-  const { setLang } = useContext(I18nContext);
+  const { setLang }: { setLang: Function } = useContext(I18nContext);
   const isSmallScreen = useMediaQuery('(max-width:390px)');
   var valueLang = 'es';
   if (typeof window !== 'undefined') {
@@ -58,6 +58,24 @@ export default function LanguageSelector() {
           style={{ marginRight: 8 }}
         />
         {isSmallScreen ? '' : 'Español'}
+      </MenuItem>
+      <MenuItem value="fr" sx={{ color: 'black', fontWeight: 'normal' }}>
+        <img
+          src="https://flagcdn.com/fr.svg"
+          width="20"
+          alt="Français"
+          style={{ marginRight: 8 }}
+        />
+        {isSmallScreen ? '' : 'Français'}
+      </MenuItem>
+      <MenuItem value="pt" sx={{ color: 'black', fontWeight: 'normal' }}>
+        <img
+          src="https://flagcdn.com/pt.svg"
+          width="20"
+          alt="Português"
+          style={{ marginRight: 8 }}
+        />
+        {isSmallScreen ? '' : 'Português'}
       </MenuItem>
     </TextField>
   );

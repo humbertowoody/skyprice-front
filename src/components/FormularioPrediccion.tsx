@@ -139,6 +139,9 @@ interface ExtendedPredictionsForm extends PredictionsForm {
 }
 
 export default function PredictionForm() {
+  // Traducción de textos
+  const { t } = useTranslation();
+
   // Inicializar Google Maps API
   const { isLoaded } = useJsApiLoader({
     id: 'skyprice-front',
@@ -147,9 +150,6 @@ export default function PredictionForm() {
     region: 'MX',
     language: 'es',
   });
-
-  // Cargar provider de contexto de internacionalización
-  const { t } = useTranslation();
 
   // Estados del componente
   const [predictions, setPredictions] = useState(null);
@@ -319,8 +319,7 @@ export default function PredictionForm() {
           <strong>SkyPrice</strong>, {t('predictionForm.title')}
         </Typography>
         <Typography variant="body2" color="gray" align="center">
-          Cargando <strong>SkyPrice</strong> y todas sus funcionalidades. Por
-          favor, espera un momento...
+          <strong>SkyPrice</strong> {t('predictionForm.loading')}
         </Typography>
       </Paper>
     );

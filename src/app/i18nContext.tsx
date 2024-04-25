@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useContext, useState, useEffect } from 'react';
+import spanish from '@/locales/es.json';
 
 export const I18nContext = createContext({
   translations: {},
@@ -8,12 +9,25 @@ export const I18nContext = createContext({
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   var defLang: string = 'es';
+  var defTranslations: any = spanish;
   if (typeof window !== 'undefined') {
     defLang = localStorage.getItem('i18nextLng') || 'es';
+    if (defLang !== 'es') {
+      import(`@/locales/${defLang}.json`)
+        .catch(() => {
+          console.error(
+            `Archivo de traducciones no encontrado para el idioma ${defLang}`,
+          );
+        })
+        .then((module) => {
+          defTranslations = module.default;
+          console.info(`Traducciones cargadas para el idioma ${defLang}`);
+        });
+    }
   }
 
   const [lang, setLang] = useState(defLang);
-  const [translations, setTranslations] = useState({});
+  const [translations, setTranslations] = useState({ ...defTranslations });
 
   useEffect(() => {
     import(`@/locales/${lang}.json`)
@@ -30,7 +44,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [lang]);
 
   return (
-    <I18nContext.Provider value={{ translations, setLang }}>
+    <I18nContext.Provider value={{ translations, setLang: setLang }}>
       {children}
     </I18nContext.Provider>
   );
@@ -39,12 +53,12 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 export function useTranslation() {
   const { translations } = useContext(I18nContext);
 
-  const t = (key, replacements = {}) => {
+  const t: Function = (key: string, replacements: any = {}) => {
     let text =
       key
         .split('.')
         .reduce(
-          (obj, k) => (obj && obj[k] !== undefined ? obj[k] : null),
+          (obj: any, k) => (obj && obj[k] !== undefined ? obj[k] : null),
           translations,
         ) || key;
     Object.keys(replacements).forEach((placeholder) => {
