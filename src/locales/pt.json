@@ -1,0 +1,107 @@
+{
+  "common": {
+    "svm": "SVM",
+    "randomForest": "Floresta Aleatória",
+    "neuralNetwork": "Redes Neurais"
+  },
+  "navbar": {
+    "prediction": "Estimativa de Preço",
+    "about": "Sobre"
+  },
+  "predictionForm": {
+    "title": "estime o preço do seu apartamento na Cidade do México",
+    "loading": "está carregando, aguarde um momento...",
+    "addressLabel": "Endereço",
+    "sizeTerrainLabel": "Tamanho do Terreno",
+    "sizeConstructionLabel": "Tamanho da Construção",
+    "roomsLabel": "Quartos",
+    "bathroomsLabel": "Banheiros",
+    "parkingLabel": "Vagas de Estacionamento",
+    "ageLabel": "Idade",
+    "municipalityLabel": "Município",
+    "municipalityPlaceholder": "Selecione um município",
+    "submitting": "Estimando preço...",
+    "submit": "Estimar Preço",
+    "submitInvalid": "Por favor, preencha todos os campos",
+    "mapInfo": "Por favor, insira um endereço válido na Cidade do México para exibir o mapa de localização do imóvel e estimar o preço.",
+    "predictions": {
+      "title": "Resultados da Estimativa",
+      "subtitle": "Apartamento em {address}",
+      "details": "Estimativa realizada com os seguintes dados: <strong>{age} anos de idade</strong>, <strong>{rooms} quartos</strong>, <strong>{bathrooms} banheiros</strong>, <strong>{parking} vagas de estacionamento</strong>, <strong>{sizeTerrain} m² de terreno</strong> e <strong>{sizeConstruction} m² de construção</strong>. O município selecionado é <strong>{municipality}</strong>.",
+      "algorithmsSummary": "Foram obtidas {algorithmsCount} estimativas de preço dos seguintes algoritmos: {svm}, {rf} e {nn}.",
+      "generatedAt": "Data da estimativa: {date} às {time}.",
+      "results": {
+        "title": "Algoritmo: {algorithm}"
+      }
+    },
+    "currencyConverter": {
+      "requestError": "Ocorreu um erro ao converter a moeda, tente novamente mais tarde",
+      "sellingPrice": "Venda",
+      "rentalPrice": "Aluguel",
+      "month": "mês",
+      "annual": "{percentage}% anual",
+      "selectCurrency": "Converter para"
+    },
+    "disclaimer": "As previsões são aproximadas e os resultados podem variar por modelo. Os preços são estimados em pesos mexicanos, e a conversão para outras moedas é realizada usando a API <a href=\"https://exchangerate-api.com/\" target=\"_blank\">ExchangeRate-API</a>. Para obter um preço exato do imóvel, recomenda-se contactar um profissional imobiliário. Para mais detalhes sobre os modelos de previsão, consulte a documentação do projeto na seção <a href=\"/sobre\" target=\"_blank\"><strong>Sobre</strong></a>.",
+    "caption1": "Foto de",
+    "caption2": "em"
+  },
+  "about": {
+    "title": "a plataforma de estimativa de preços de apartamentos na Cidade do México",
+    "caption": "Paseo de la Reforma, Cidade do México",
+    "captionBy": "Foto de",
+    "captionBy2": "em",
+    "question": "O que é",
+    "description": "<strong>SkyPrice</strong> é uma plataforma projetada para analisar e estimar preços de propriedades na Cidade do México, baseada em um conjunto detalhado de dados locais. Utilizando técnicas de aprendizado de máquina como <strong>Floresta Aleatória</strong>, <strong>Máquina de Vetores de Suporte (SVM)</strong> e <strong>Redes Neurais</strong>, ela oferece estimativas precisas do valor de mercado de apartamentos com base em suas características específicas. Adicionalmente, inclui uma <strong>API pública</strong> que facilita a integração de suas funcionalidades em outras aplicações, expandindo assim sua aplicabilidade e alcance.",
+    "button": "Estime o preço do seu apartamento agora!",
+    "data": {
+      "title": "Dados",
+      "description1": "Para o treinamento dos modelos, conjuntos de dados obtidos de plataformas de venda de propriedades na Cidade do México foram usados. Os dados foram pré-processados e limpos para obter um conjunto de dados homogêneo e sem valores nulos.",
+      "description2": "Os dados foram divididos em dois conjuntos: um de treinamento e outro de teste. O conjunto de treinamento foi utilizado para treinar os modelos, enquanto o conjunto de teste foi usado para avaliar o desempenho dos modelos.",
+      "caption": "Vista aérea da Cidade do México",
+      "captionBy": "Foto de",
+      "captionBy2": "em",
+      "cleanData": {
+        "title": "Dados 'limpos'",
+        "amount": "{amount} registros",
+        "description": "Isso representa {percentage}% do total de dados disponíveis ({amount} registros)."
+      },
+      "trainingData": {
+        "title": "Dados de treinamento",
+        "amount": "{amount} registros",
+        "description": "Isso representa {percentage}% dos dados (treinamento e teste)."
+      },
+      "testData": {
+        "title": "Dados de teste",
+        "amount": "{amount} registros",
+        "description": "Isso representa {percentage}% dos dados (treinamento e teste)."
+      }
+    },
+    "models": {
+      "title": "Modelos",
+      "description": "Agora vamos discutir os algoritmos de aprendizado de máquina usados pelo <strong>SkyPrice</strong>. Aqui estão as estatísticas de cada modelo usado para a estimativa de preços de apartamentos na Cidade do México. Os modelos, que incluem <strong>Floresta Aleatória</strong>, <strong>SVM</strong> e <strong>Redes Neurais</strong>, foram meticulosamente configurados e treinados com uma variedade de hiperparâmetros para otimizar seu desempenho na previsão de preços.",
+      "description2": "Esta seção detalha os resultados obtidos, incluindo o <i>Erro Absoluto Médio (MAE)</i>, o <i>coeficiente de determinação (R²)</i> e o <i>Erro Quadrático Médio (MSE)</i>, junto com gráficos de ajuste que comparam as previsões aos dados de treinamento, proporcionando uma visão clara da eficácia e precisão de cada modelo.",
+      "caption": "Parque <i>La Mexicana</i>, Santa Fe, Cidade do México",
+      "captionBy": "Foto de",
+      "captionBy2": "em",
+      "learnMore": "Saiba mais...",
+      "rf": "Floresta Aleatória é um modelo composto por múltiplas árvores de decisão e é eficaz na prevenção de sobreajuste. Com um RMSE de {rmse} e um coeficiente R2 de {r2}%, este modelo destaca-se pela sua precisão preditiva. Foi configurado com {n_estimators} árvores e uma profundidade máxima de {max_depth}. A pontuação OOB indica seu desempenho sem validação cruzada adicional.",
+      "svm": "O SVM utiliza um kernel {kernel} para lidar com relações não lineares. Com um valor de R2 de {r2}%, o modelo foi configurado com um parâmetro C de {C} e um epsilon de {epsilon}, ajustando a margem de erro e a fronteira de decisão.",
+      "nn": "A Rede Neural opera com uma taxa de aprendizado de {learning_rate} e parâmetros beta1 e beta2 ajustados para {beta_1} e {beta_2}. O RMSE alcançado mostra sua capacidade preditiva na estimativa de preços.",
+      "chartsTitle": "Gráficos de Ajuste",
+      "chartsBtn": "Ver gráficos em outra aba"
+    },
+    "api": {
+      "title": "API Pública do <strong>SkyPrice</strong>",
+      "description": "Gostaria de usar nossa API para obter estimativas de preços de apartamentos na Cidade do México? Visite nossa documentação para conhecer os endpoints disponíveis e como utilizá-los.",
+      "swagger": "Swagger UI é uma ferramenta que permite visualizar e testar endpoints de uma API de forma interativa.",
+      "visitSwagger": "Visitar Swagger UI",
+      "redoc": "ReDoc é uma ferramenta de documentação de APIs para visualizar a documentação de uma API.",
+      "visitRedoc": "Visitar ReDoc"
+    },
+    "credits": {
+      "title": "Créditos",
+      "description": "Este projeto foi desenvolvido por <strong>Humberto Alejandro Ortega Alcocer</strong> como parte de seu <strong>Trabalho Terminal 2024-A053</strong> com o título de <i>\"Plataforma de Estimativa de Preços de Mercado de Apartamentos na Cidade do México\"</i>, orientado pelo <strong>Prof. Ariel López Rojas</strong> na <strong>Escola Superior de Computação do Instituto Politécnico Nacional</strong> na Cidade do México para obter o título de <strong>Engenheiro de Sistemas de Computação</strong>."
+    }
+  }
+}

@@ -10,6 +10,7 @@
   },
   "predictionForm": {
     "title": "estima el precio de tu departamento en la Ciudad de México",
+    "loading": "está cargando, por favor espera un momento...",
     "addressLabel": "Dirección",
     "sizeTerrainLabel": "Tam. terreno",
     "sizeConstructionLabel": "Tam. construcción",

@@ -9,8 +9,9 @@
     "about": "About Us"
   },
   "predictionForm": {
-    "title": "Estimate your apartment's price in Mexico City",
+    "title": "estimate the price of your apartment in Mexico City",
     "addressLabel": "Address",
+    "loading": "is loading, please wait a moment...",
     "sizeTerrainLabel": "Land Size",
     "sizeConstructionLabel": "Construction Size",
     "roomsLabel": "Rooms",
