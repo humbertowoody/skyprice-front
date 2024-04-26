@@ -23,6 +23,7 @@ import reformasm from '/public/reforma-sm.jpg';
 import Link from 'next/link';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import { useTranslation } from '../i18nContext';
+import ModelComparison from '@/components/ModelComparison';
 
 export default function PaginaEstadisticas() {
   // Traducción de la página
@@ -227,6 +228,9 @@ export default function PaginaEstadisticas() {
               {t('about.models.chartsBtn')}
             </Button>
           </Link>
+
+          {/* Gráficas de comparación de modelos */}
+          <ModelComparison models={modelos.models} />
         </Box>
       </Container>
 

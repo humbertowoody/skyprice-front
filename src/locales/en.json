@@ -1,8 +1,11 @@
 {
   "common": {
-    "svm": "SVM",
+    "svm": "Support Vector Machine",
+    "svmShort": "SVM",
     "randomForest": "Random Forest",
-    "neuralNetwork": "Neural Networks"
+    "randomForestShort": "RF",
+    "neuralNetwork": "Neural Networks",
+    "neuralNetworkShort": "NN"
   },
   "navbar": {
     "prediction": "Price Estimation",
@@ -119,7 +122,10 @@
       "svm": "The SVM employs a {kernel} kernel to manage non-linear relationships. With an R2 of {r2}%, the model is set with a C parameter of {C} and an epsilon of {epsilon}, adjusting the error margin and decision boundary.",
       "nn": "The Neural Network operates with a learning rate of {learning_rate} and beta1 and beta2 parameters adjusted to {beta_1} and {beta_2}. The RMSE achieved showcases its predictive capacity in price estimation.",
       "chartsTitle": "Adjustment Charts",
-      "chartsBtn": "View charts in another tab"
+      "chartsBtn": "View charts in another tab",
+      "comparisonTitle": "Model Comparison",
+      "yAxisLabel": "Result Obtained",
+      "comparisonDescription": "Comparison of the results of each model for each evaluation metric: Coefficient of Determination (R²), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and Mean Squared Error (MSE)."
     },
     "api": {
       "title": "Public API of <strong>SkyPrice</strong>",
