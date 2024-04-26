@@ -89,7 +89,7 @@ export default function ModelComparison({ models }) {
                 dataset={scaled_dataset}
                 yAxis={[{ scaleType: 'band', dataKey: 'metric' }]}
                 xAxis={[
-                  { label: t('about.models.yAxisLabel'), min: -0.1, max: 1.1 },
+                  { label: t('about.models.yAxisLabel'), min: 0, max: 1 },
                 ]}
                 sx={{
                   [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -127,7 +127,7 @@ export default function ModelComparison({ models }) {
                 dataset={scaled_dataset}
                 xAxis={[{ scaleType: 'band', dataKey: 'metric' }]}
                 yAxis={[
-                  { label: t('about.models.yAxisLabel'), min: -0.1, max: 1.1 },
+                  { label: t('about.models.yAxisLabel'), min: 0, max: 1 },
                 ]}
                 sx={{
                   [`.${axisClasses.left} .${axisClasses.label}`]: {
