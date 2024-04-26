@@ -54,72 +54,6 @@ const alcaldias: string[] = [
   'Xochimilco',
 ];
 
-// Esquema de validación para el formulario
-const validationSchema = yup.object({
-  Size_Terrain: yup
-    .number()
-    .required('El tamaño del terreno es requerido')
-    .min(10, 'El tamaño del terreno debe ser mayor o igual a 10'),
-  Size_Construction: yup
-    .number()
-    .required('El tamaño de la construcción es requerido')
-    .min(10, 'El tamaño de la construcción debe ser mayor o igual a 10'),
-  Rooms: yup
-    .number()
-    .required('El número de habitaciones es requerido')
-    .integer()
-    .min(0, 'El número de habitaciones debe ser mayor o igual a 0')
-    .max(10, 'El número de habitaciones debe ser menor o igual a 10'),
-  // Validar que los baños sean un número en pasos de 0.5 y mayor a 1 (mínimo 1 baño)
-  Bathrooms: yup
-    .number()
-    .required('El número de baños es requerido')
-    .min(1, 'El número de baños debe ser mayor o igual a 1')
-    .max(10, 'El número de baños debe ser menor o igual a 10')
-    .test(
-      'is-half',
-      'El número de baños debe ser un número entero o en pasos de 0.5',
-      (value) => {
-        if (value) {
-          return value % 0.5 === 0;
-        }
-        return true;
-      },
-    ),
-  Parking: yup
-    .number()
-    .required('El número de espacios de estacionamiento es requerido')
-    .integer()
-    .min(
-      0,
-      'El número de espacios de estacionamiento debe ser mayor o igual a 0',
-    )
-    .max(
-      5,
-      'El número de espacios de estacionamiento debe ser menor o igual a 5',
-    ),
-  Age: yup
-    .number()
-    .required('La edad de la propiedad es requerida')
-    .integer()
-    .min(0, 'La edad de la propiedad debe ser mayor o igual a 0')
-    .max(100, 'La edad de la propiedad debe ser menor o igual a 100'),
-  Lat: yup
-    .number()
-    .required('La dirección es requerida')
-    .min(19.1, 'La dirección debe encontrarse dentro de la CDMX')
-    .max(19.7, 'La dirección debe encontrarse dentro de la CDMX'),
-  Lng: yup
-    .number()
-    .required('La dirección es requerida')
-    .min(-99.4, 'La dirección debe encontrarse dentro de la CDMX')
-    .max(-98.9, 'La dirección debe encontrarse dentro de la CDMX'),
-  Municipality: yup
-    .string()
-    .required('La alcaldía es requerida')
-    .oneOf(alcaldias, 'La alcaldía no es válida'),
-});
-
 // Interfaz para el body de la petición POST a la API
 interface PredictionsForm {
   Size_Terrain?: number;
@@ -141,6 +75,71 @@ interface ExtendedPredictionsForm extends PredictionsForm {
 export default function PredictionForm() {
   // Traducción de textos
   const { t } = useTranslation();
+
+  // Esquema de validación para el formulario
+  const validationSchema = yup.object({
+    Size_Terrain: yup
+      .number()
+      .required(t('predictionForm.validations.sizeTerrainRequired'))
+      .min(10, t('predictionForm.validations.sizeTerrainMin', { min: 10 }))
+      .max(1000, t('predictionForm.validations.sizeTerrainMax', { max: 1000 })),
+    Size_Construction: yup
+      .number()
+      .required(t('predictionForm.validations.sizeConstructionRequired'))
+      .min(10, t('predictionForm.validations.sizeConstructionMin', { min: 10 }))
+      .max(
+        1000,
+        t('predictionForm.validations.sizeConstructionMax', { max: 1000 }),
+      ),
+    Rooms: yup
+      .number()
+      .required(t('predictionForm.validations.roomsRequired'))
+      .integer()
+      .min(0, t('predictionForm.validations.roomsMin', { min: 0 }))
+      .max(10, t('predictionForm.validations.roomsMax', { max: 10 })),
+    // Validar que los baños sean un número en pasos de 0.5 y mayor a 1 (mínimo 1 baño)
+    Bathrooms: yup
+      .number()
+      .required(t('predictionForm.validations.bathroomsRequired'))
+      .min(1, t('predictionForm.validations.bathroomsMin', { min: 1 }))
+      .max(10, t('predictionForm.validations.bathroomsMax', { max: 10 }))
+      .test(
+        'is-half',
+        t('predictionForm.validations.bathroomsHalf'),
+        (value) => {
+          if (value) {
+            return value % 0.5 === 0;
+          }
+          return true;
+        },
+      ),
+    Parking: yup
+      .number()
+      .required(t('predictionForm.validations.parkingRequired'))
+      .integer()
+      .min(0, t('predictionForm.validations.parkingMin', { min: 0 }))
+      .max(5, t('predictionForm.validations.parkingMax', { max: 5 })),
+    Age: yup
+      .number()
+      .required(t('predictionForm.validations.ageRequired'))
+      .integer()
+      .min(0, t('predictionForm.validations.ageMin', { min: 0 }))
+      .max(100, t('predictionForm.validations.ageMax', { max: 100 })),
+    Lat: yup
+      .number()
+      .required(t('predictionForm.validations.latRequired'))
+      .min(19.1, t('predictionForm.validations.outOfBounds'))
+      .max(19.7, t('predictionForm.validations.outOfBounds')),
+    Lng: yup
+      .number()
+      .required(t('predictionForm.validations.lngRequired'))
+      .min(-99.4, t('predictionForm.validations.outOfBounds'))
+      .max(-98.9, t('predictionForm.validations.outOfBounds')),
+    Municipality: yup
+      .string()
+      .required(t('predictionForm.validations.municipalityRequired'))
+      .oneOf(alcaldias, t('predictionForm.validations.municipalityInvalid')),
+  });
 
   // Inicializar Google Maps API
   const { isLoaded } = useJsApiLoader({
@@ -212,9 +211,7 @@ export default function PredictionForm() {
           fecha: new Date(),
         });
       } catch (error) {
-        alert(
-          'Ocurrió un error al estimar el precio de la propiedad, intente de nuevo más tarde.',
-        );
+        alert(t('predictionForm.errorPrediction'));
         console.error(error);
       }
     },
@@ -354,6 +351,7 @@ export default function PredictionForm() {
                 id="address"
                 name="address"
                 label={t('predictionForm.addressLabel')}
+                placeholder={t('predictionForm.addressPlaceholder')}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 margin="normal"

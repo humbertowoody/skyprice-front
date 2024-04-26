@@ -98,9 +98,9 @@ export default function PaginaEstadisticas() {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(URL);
-      setCopySuccess('¡URL copiada!');
+      setCopySuccess(t('about.copySuccess'));
     } catch (err) {
-      setCopySuccess('Error al copiar');
+      setCopySuccess(t('about.copyError'));
     }
   };
 
@@ -213,7 +213,7 @@ export default function PaginaEstadisticas() {
           <Box sx={{ maxWidth: 'lg' }}>
             <img
               src={`${URL}/plots`}
-              alt="Gráficas de los modelos"
+              alt={t('about.models.chartsTitle')}
               style={{ width: '100%', height: 'auto' }}
             />
           </Box>
