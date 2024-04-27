@@ -10,7 +10,7 @@ export default function Footer() {
           display: { xs: 'flex', md: 'none' },
           flexDirection: 'column',
           gap: 2,
-          mt: 4,
+          mt: 0,
         }}
         textAlign="center"
         py={2}

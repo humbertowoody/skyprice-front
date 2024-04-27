@@ -9,7 +9,8 @@
   },
   "navbar": {
     "prediction": "Estimativa de Preço",
-    "about": "Sobre"
+    "about": "Sobre",
+    "map": "Mapa"
   },
   "predictionForm": {
     "title": "estime o preço do seu apartamento na Cidade do México",

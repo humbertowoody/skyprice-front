@@ -9,7 +9,8 @@
   },
   "navbar": {
     "prediction": "Price Estimation",
-    "about": "About Us"
+    "about": "About Us",
+    "map": "Map"
   },
   "predictionForm": {
     "title": "estimate the price of your apartment in Mexico City",

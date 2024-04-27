@@ -9,7 +9,8 @@
   },
   "navbar": {
     "prediction": "Estimation de prix",
-    "about": "À propos"
+    "about": "À propos",
+    "map": "Carte"
   },
   "predictionForm": {
     "title": "estimez le prix de votre appartement dans Mexico",

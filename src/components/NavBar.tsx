@@ -16,6 +16,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import InfoIcon from '@mui/icons-material/Info';
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from '../app/i18nContext';
+import MapIcon from '@mui/icons-material/Map';
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -65,7 +66,6 @@ export default function NavBar() {
                 v1.0.0
               </Typography>
             </Typography>
-            {/* subtítulo pequeñísimo con la versión de la app 1.0.0 */}
 
             {/* Para pantallas medianas y grandes */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
@@ -89,6 +89,16 @@ export default function NavBar() {
                   textTransform: 'none',
                 }}>
                 {t('navbar.about')}
+              </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                href="/mapa"
+                sx={{
+                  fontWeight: 600,
+                  textTransform: 'none',
+                }}>
+                {t('navbar.map')}
               </Button>
             </Box>
 
@@ -140,6 +150,17 @@ export default function NavBar() {
                     <InfoIcon sx={{ mr: 1 }} />{' '}
                     <Typography textAlign="center">
                       {t('navbar.about')}
+                    </Typography>
+                  </Box>
+                </MenuItem>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  href="/mapa">
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <MapIcon sx={{ mr: 1 }} />{' '}
+                    <Typography textAlign="center">
+                      {t('navbar.map')}
                     </Typography>
                   </Box>
                 </MenuItem>

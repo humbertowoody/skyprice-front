@@ -9,7 +9,8 @@
   },
   "navbar": {
     "prediction": "Estimación de precio",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "map": "Mapa"
   },
   "predictionForm": {
     "title": "estima el precio de tu departamento en la Ciudad de México",
