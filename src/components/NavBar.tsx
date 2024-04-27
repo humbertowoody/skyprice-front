@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import ApartmentIcon from '@mui/icons-material/Apartment';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,6 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from '../app/i18nContext';
 import MapIcon from '@mui/icons-material/Map';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ export default function NavBar() {
         component="nav">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <ApartmentIcon sx={{ mr: 1 }} />
+            <LocationCityIcon sx={{ mr: 1 }} />
             <Typography
               variant="h5"
               noWrap

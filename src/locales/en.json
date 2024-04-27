@@ -9,7 +9,7 @@
   },
   "navbar": {
     "prediction": "Price Estimation",
-    "about": "About Us",
+    "about": "About",
     "map": "Map"
   },
   "predictionForm": {
