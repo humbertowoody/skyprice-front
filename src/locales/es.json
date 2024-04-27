@@ -140,5 +140,12 @@
       "title": "Créditos",
       "description": "Este proyecto fue desarrollado por <strong>Humberto Alejandro Ortega Alcocer</strong> como parte de su <strong>Trabajo Terminal 2024-A053</strong> con el título de <i>\"Plataforma de estimación de precios de mercado de departamentos en la Ciudad de México\"</i> asesorado por el <strong> Mtro. en C. Ariel López Rojas</strong> en la <strong>Escuela Superior de Cómputo del Instituto Politécnico Nacional</strong> en la Ciudad de México para obtener el título de <strong>Ingeniero en Sistemas Computacionales</strong>."
     }
+  },
+  "map": {
+    "loadButton": "Cargar mapa interactivo (32 MB)",
+    "dialogTitle": "Cargar mapa interactivo",
+    "dialogContent": "El mapa interactivo de la Ciudad de México puede consumir una cantidad significativa de datos (32 MB). ¿Deseas cargar el mapa?",
+    "dialogNo": "No, gracias",
+    "dialogYes": "Sí, cargar mapa"
   }
 }

@@ -140,5 +140,12 @@
       "title": "Credits",
       "description": "This project was developed by <strong>Humberto Alejandro Ortega Alcocer</strong> as part of his <strong>Terminal Work 2024-A053</strong> with the title of <i>\"Price Estimation Platform for Market Prices of Apartments in Mexico City\"</i>, advised by <strong>M.Sc. Ariel López Rojas</strong> at the <strong>Higher School of Computing of the National Polytechnic Institute</strong> in Mexico City to earn the degree of <strong>Bachelor of Science in Computer Engineering</strong>."
     }
+  },
+  "map": {
+    "loadButton": "Load Interactive Map (32 MB)",
+    "dialogTitle": "Load Interactive Map",
+    "dialogContent": "The interactive map of Mexico City may consume a significant amount of data (32 MB). Would you like to load the map?",
+    "dialogNo": "No, thanks",
+    "dialogYes": "Yes, load map"
   }
 }

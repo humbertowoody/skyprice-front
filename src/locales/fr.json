@@ -140,5 +140,12 @@
       "title": "Crédits",
       "description": "Ce projet a été développé par <strong>Humberto Alejandro Ortega Alcocer</strong> dans le cadre de son <strong>Travail Terminal 2024-A053</strong> avec le titre de <i>\"Plateforme d'estimation des prix de marché des appartements dans la Ville de Mexico\"</i>, conseillé par le <strong>Prof. Ariel López Rojas</strong> à l'<strong>École Supérieure d'Informatique de l'Institut Polytechnique National</strong> dans la Ville de Mexico pour obtenir le diplôme d'<strong>Ingénieur en Systèmes Informatiques</strong>."
     }
+  },
+  "map": {
+    "loadButton": "Charger la carte interactive (32 Mo)",
+    "dialogTitle": "Charger la carte interactive",
+    "dialogContent": "La carte interactive de la Ville de Mexico peut consommer une quantité significative de données (32 Mo). Souhaitez-vous charger la carte ?",
+    "dialogNo": "Non, merci",
+    "dialogYes": "Oui, charger la carte"
   }
 }

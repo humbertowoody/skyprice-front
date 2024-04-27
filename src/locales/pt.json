@@ -140,5 +140,12 @@
       "title": "Créditos",
       "description": "Este projeto foi desenvolvido por <strong>Humberto Alejandro Ortega Alcocer</strong> como parte de seu <strong>Trabalho Terminal 2024-A053</strong> com o título de <i>\"Plataforma de Estimativa de Preços de Mercado de Apartamentos na Cidade do México\"</i>, orientado pelo <strong>Prof. Ariel López Rojas</strong> na <strong>Escola Superior de Computação do Instituto Politécnico Nacional</strong> na Cidade do México para obter o título de <strong>Engenheiro de Sistemas de Computação</strong>."
     }
+  },
+  "map": {
+    "loadButton": "Carregar Mapa Interativo (32 MB)",
+    "dialogTitle": "Carregar Mapa Interativo",
+    "dialogContent": "O mapa interativo da Cidade do México pode consumir uma quantidade significativa de dados (32 MB). Deseja carregar o mapa?",
+    "dialogNo": "Não, obrigado",
+    "dialogYes": "Sim, carregar mapa"
   }
 }
