@@ -44,7 +44,7 @@ export default function Mapa() {
             display: 'flex',
           }}>
           <iframe
-            src="/mapa.html"
+            src="/kepler.html"
             style={{
               width: '100%',
               border: 'none',
