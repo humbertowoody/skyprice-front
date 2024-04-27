@@ -109,6 +109,11 @@
         "title": "Données de test",
         "amount": "{amount} enregistrements",
         "description": "Cela représente {percentage}% des données (entraînement et test)."
+      },
+      "exploreMap": {
+        "title": "Carte Interactive",
+        "intro": "Les données peuvent être consultées sur une carte interactive utilisant Kepler.gl pour visualiser l'emplacement des propriétés utilisées pour l'entraînement des modèles de prédiction des prix. Le jeu de données complet et quatre couches prédéfinies avec des visualisations géospatiales pertinentes sont inclus : Emplacements des propriétés, Carte thermique des prix, Distribution des prix par km², et Clusters de prix.",
+        "cta": "Explorez la carte !"
       }
     },
     "models": {

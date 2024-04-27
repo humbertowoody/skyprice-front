@@ -109,6 +109,11 @@
         "title": "Datos de prueba",
         "amount": "{amount} registros",
         "description": "Esto equivale al {percentage}% de los datos (entrenamiento y prueba)."
+      },
+      "exploreMap": {
+        "title": "Mapa interactivo",
+        "intro": "Los datos pueden consultarse en un mapa interactivo utilizando Kepler.gl para visualizar la ubicación de las propiedades utilizadas para el entrenamiento de los modelos de predicción de precios. Se incluye el dataset completo y cuatro capas predefinidas con visualizaciones geoespaciales relevantes: Ubicación de propiedades, Mapa de calor de precios, Distribución de precios por km² y Clústeres de precios.",
+        "cta": "¡Explora el mapa!"
       }
     },
     "models": {

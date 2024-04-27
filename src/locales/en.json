@@ -109,6 +109,11 @@
         "title": "Test Data",
         "amount": "{amount} records",
         "description": "This constitutes {percentage}% of the data (training and testing)."
+      },
+      "exploreMap": {
+        "title": "Interactive Map",
+        "intro": "Data can be viewed on an interactive map using Kepler.gl to visualize the locations of properties used for training the price prediction models. The complete dataset and four predefined layers with relevant geospatial visualizations are included: Property Locations, Price Heatmap, Price Distribution per km², and Price Clusters.",
+        "cta": "Explore the map!"
       }
     },
     "models": {

@@ -15,6 +15,10 @@ import RuleIcon from '@mui/icons-material/Rule';
 import CardMedia from '@mui/material/CardMedia';
 import aerialcdmx from '/public/aerial-cdmx.jpg';
 import { useTranslation } from '@/app/i18nContext';
+import MapIcon from '@mui/icons-material/Map';
+import { Button } from '@mui/material';
+import CardActions from '@mui/material/CardActions';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 export const Datos: React.FC<{ estadisticas: Estadisticas }> = ({
   estadisticas,
@@ -164,6 +168,50 @@ export const Datos: React.FC<{ estadisticas: Estadisticas }> = ({
           </Card>
         </Grid>
       </Grid>
+
+      <Box display="flex" justifyContent="center" my={4}>
+        <Card
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+            mx: 1,
+            maxWidth: '800px',
+          }}>
+          <CardMedia
+            image="/kepler-bg.png"
+            title="Map using Kepler.gl"
+            sx={{ height: 200 }}
+          />
+          <CardContent>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                mb: 2,
+              }}>
+              <MapIcon color="primary" sx={{ fontSize: 40, mr: 1 }} />
+              <Typography variant="h6" component="div" textAlign="center">
+                {t('about.data.exploreMap.title')}
+              </Typography>
+            </Box>
+            <Typography variant="body1" align="justify">
+              {t('about.data.exploreMap.intro')}
+            </Typography>
+          </CardContent>
+          <CardActions sx={{ justifyContent: 'center', mb: 2 }}>
+            <Button
+              size="large"
+              color="primary"
+              href="/mapa"
+              endIcon={<ExploreIcon />}
+              variant="outlined"
+              sx={{ textTransform: 'none' }}>
+              {t('about.data.exploreMap.cta')}
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
     </Container>
   );
 };
