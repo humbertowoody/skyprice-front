@@ -147,9 +147,9 @@
     }
   },
   "map": {
-    "loadButton": "Carregar Mapa Interativo (32 MB)",
+    "loadButton": "Carregar Mapa Interativo (~60 MB)",
     "dialogTitle": "Carregar Mapa Interativo",
-    "dialogContent": "O mapa interativo da Cidade do México pode consumir uma quantidade significativa de dados (32 MB). Deseja carregar o mapa?",
+    "dialogContent": "O mapa interativo da Cidade do México pode consumir uma quantidade significativa de dados (~60 MB). Deseja carregar o mapa?",
     "dialogNo": "Não, obrigado",
     "dialogYes": "Sim, carregar mapa"
   }

@@ -147,9 +147,9 @@
     }
   },
   "map": {
-    "loadButton": "Charger la carte interactive (32 Mo)",
+    "loadButton": "Charger la carte interactive (~60 Mo)",
     "dialogTitle": "Charger la carte interactive",
-    "dialogContent": "La carte interactive de la Ville de Mexico peut consommer une quantité significative de données (32 Mo). Souhaitez-vous charger la carte ?",
+    "dialogContent": "La carte interactive de la Ville de Mexico peut consommer une quantité significative de données (~60 Mo). Souhaitez-vous charger la carte ?",
     "dialogNo": "Non, merci",
     "dialogYes": "Oui, charger la carte"
   }

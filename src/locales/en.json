@@ -147,9 +147,9 @@
     }
   },
   "map": {
-    "loadButton": "Load Interactive Map (32 MB)",
+    "loadButton": "Load Interactive Map (~60 MB)",
     "dialogTitle": "Load Interactive Map",
-    "dialogContent": "The interactive map of Mexico City may consume a significant amount of data (32 MB). Would you like to load the map?",
+    "dialogContent": "The interactive map of Mexico City may consume a significant amount of data (~60 MB). Would you like to load the map?",
     "dialogNo": "No, thanks",
     "dialogYes": "Yes, load map"
   }
