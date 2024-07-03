@@ -1,4 +1,5 @@
 User-Agent: *
-Disallow: /
+Disallow:
+Allow: /
 
 Sitemap: https://skyprice.xyz/sitemap.xml
